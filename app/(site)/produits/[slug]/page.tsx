@@ -157,10 +157,10 @@ export default function ProductPage() {
           </div>
 
           <div className="mb-5 flex flex-col gap-3 sm:flex-row">
-            <Link href="/checkout" className="flex h-12 flex-[1.4] items-center justify-center rounded-lg bg-brand text-[15px] font-bold text-white">
+            <Link href="/checkout" className="flex h-12 min-h-[48px] flex-[1.4] items-center justify-center rounded-lg bg-brand text-[15px] font-bold text-white">
               Commander maintenant
             </Link>
-            <Link href="/panier" className="flex h-12 flex-1 items-center justify-center gap-2 rounded-lg border-2 border-brand bg-white text-[15px] font-semibold text-brand">
+            <Link href="/panier" className="flex h-12 min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg border-2 border-brand bg-white text-[15px] font-semibold text-brand">
               <ShoppingCart size={17} />
               Panier
             </Link>

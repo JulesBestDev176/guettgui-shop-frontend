@@ -81,11 +81,11 @@ export default function SuiviCommandePage() {
       {order && (
         <>
           {/* Status banner */}
-          <section className="bg-ink mb-5 overflow-hidden rounded-xl p-5 text-white">
-            <p className="font-body mb-1 text-xs text-gray-400">Statut actuel · {order.code}</p>
-            <div className="flex items-center gap-2 text-xl font-bold">
-              <Truck size={22} />
-              {STATUS_LABELS[order.status] || order.status}
+          <section className="bg-ink mb-5 overflow-hidden rounded-xl p-4 sm:p-5 text-white">
+            <p className="font-body mb-1 text-xs text-gray-400 break-all">Statut actuel · {order.code}</p>
+            <div className="flex items-center gap-2 text-lg sm:text-xl font-bold">
+              <Truck size={22} className="shrink-0" />
+              <span>{STATUS_LABELS[order.status] || order.status}</span>
             </div>
             <p className="font-body mt-1.5 text-xs text-gray-400">
               Commande du {new Date(order.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
@@ -97,12 +97,12 @@ export default function SuiviCommandePage() {
             <h2 className="mb-3 text-sm font-bold">Articles commandes</h2>
             <div className="space-y-2">
               {order.items.map((item) => (
-                <div key={item.id} className="flex items-center justify-between rounded-lg bg-page p-3">
-                  <div>
-                    <p className="text-sm font-semibold text-ink">{item.name}</p>
+                <div key={item.id} className="flex items-center justify-between gap-3 rounded-lg bg-page p-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-ink truncate">{item.name}</p>
                     <p className="font-body text-xs text-muted">{item.quantity} x {item.unitPrice.toLocaleString()} F</p>
                   </div>
-                  <p className="text-sm font-bold text-ink">{item.total.toLocaleString()} F</p>
+                  <p className="text-sm font-bold text-ink shrink-0">{item.total.toLocaleString()} F</p>
                 </div>
               ))}
             </div>

@@ -52,13 +52,13 @@ export default function CheckoutPage() {
         <h1 className="text-base font-bold">Paiement</h1>
       </div>
 
-      <div className="mb-2 flex items-center justify-center gap-1.5">
+      <div className="mb-2 flex items-center justify-center gap-1">
         {[1, 2, 3, 4].map((step) => (
-          <div key={step} className="flex items-center gap-1.5">
-            <span className={`flex h-[26px] w-[26px] items-center justify-center rounded-full text-xs font-bold ${step < 3 ? "bg-brand text-white" : step === 3 ? "bg-brand text-white" : "bg-gray-200 text-muted"}`}>
+          <div key={step} className="flex items-center gap-1">
+            <span className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full text-xs font-bold ${step < 3 ? "bg-brand text-white" : step === 3 ? "bg-brand text-white" : "bg-gray-200 text-muted"}`}>
               {step < 3 ? <Check size={13} strokeWidth={3} /> : step}
             </span>
-            {step < 4 && <span className={`h-0.5 w-6 ${step < 3 ? "bg-brand" : step === 3 ? "bg-brand" : "bg-gray-200"}`} />}
+            {step < 4 && <span className={`h-0.5 w-4 sm:w-6 shrink-0 ${step < 3 ? "bg-brand" : step === 3 ? "bg-brand" : "bg-gray-200"}`} />}
           </div>
         ))}
       </div>

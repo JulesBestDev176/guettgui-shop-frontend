@@ -82,30 +82,31 @@ export default function HomePage() {
               </p>
 
               <div className="mt-8 flex max-w-md items-center rounded-lg bg-white p-1.5 pl-4 shadow-sm">
-                <Search size={18} className="text-muted" />
+                <Search size={18} className="text-muted shrink-0" />
                 <input
-                  className="h-10 flex-1 bg-transparent pl-2.5 text-sm outline-none placeholder:text-muted font-body"
+                  className="h-10 flex-1 min-w-0 bg-transparent pl-2.5 text-sm outline-none placeholder:text-muted font-body"
                   placeholder="Ex : poulet de chair a Dakar"
                 />
                 <Link
                   href="/catalogue"
-                  className="hidden sm:flex h-10 items-center rounded-md bg-brand px-5 text-sm font-semibold text-white"
+                  className="flex h-10 shrink-0 items-center rounded-md bg-brand px-3 sm:px-5 text-sm font-semibold text-white"
                 >
-                  Rechercher
+                  <span className="sm:hidden"><Search size={16} /></span>
+                  <span className="hidden sm:inline">Rechercher</span>
                 </Link>
               </div>
 
-              <div className="mt-5 flex gap-3">
+              <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/catalogue"
-                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-semibold text-white"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-brand px-5 text-sm font-semibold text-white"
                 >
                   Voir les produits
                   <ArrowRight size={16} />
                 </Link>
                 <Link
                   href="/devenir-vendeur"
-                  className="inline-flex h-11 items-center rounded-lg border border-brand px-5 text-sm font-semibold text-brand"
+                  className="inline-flex h-12 items-center rounded-lg border border-brand px-5 text-sm font-semibold text-brand"
                 >
                   Devenir vendeur
                 </Link>
@@ -143,7 +144,7 @@ export default function HomePage() {
               ))}
               <Link
                 href="/catalogue"
-                className="flex h-10 items-center justify-center rounded-lg bg-brand px-5 text-sm font-semibold text-white"
+                className="flex h-11 items-center justify-center rounded-lg bg-brand px-5 text-sm font-semibold text-white"
               >
                 Voir les offres
               </Link>
@@ -227,7 +228,7 @@ export default function HomePage() {
               <h2 className="text-xl font-bold md:text-2xl">Comment ca marche ?</h2>
               <p className="font-body mt-1 text-sm text-muted">Commandez en 4 etapes simples</p>
             </div>
-            <div className="mt-8 grid gap-8 md:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
               {howItWorks.map(({ title, text, icon: Icon }, index) => (
                 <div key={title} className="text-center">
                   <div className="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">

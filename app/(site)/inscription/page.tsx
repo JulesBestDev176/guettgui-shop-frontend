@@ -56,7 +56,7 @@ export default function InscriptionPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-12">
+    <div className="max-w-md mx-auto px-4 py-8 sm:py-12">
       <Link href="/" className="mb-8 inline-block">
         <img src="/assets/logo.png" alt="Guett Gui" className="h-10 object-contain" />
       </Link>

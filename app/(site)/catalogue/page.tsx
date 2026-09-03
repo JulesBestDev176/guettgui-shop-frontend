@@ -58,8 +58,8 @@ function FilterPanel({
 
         <div>
           <h3 className="mb-3 text-[13px] font-semibold">Categorie</h3>
-          <label className="mb-2.5 flex items-center gap-2.5 font-body text-[13px] cursor-pointer">
-            <span className={`flex h-[18px] w-[18px] items-center justify-center rounded ${filters.category === "" ? "bg-brand" : "border-2 border-gray-300"}`}>
+          <label className="mb-2.5 flex min-h-[36px] items-center gap-2.5 font-body text-[13px] cursor-pointer">
+            <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded ${filters.category === "" ? "bg-brand" : "border-2 border-gray-300"}`}>
               {filters.category === "" && <span className="h-2 w-2 rounded-sm bg-white" />}
             </span>
             <button onClick={() => onFilterChange({ category: "", page: 1 })} className="text-left">
@@ -67,8 +67,8 @@ function FilterPanel({
             </button>
           </label>
           {categories.map((cat) => (
-            <label key={cat.id} className="mb-2.5 flex items-center gap-2.5 font-body text-[13px] cursor-pointer">
-              <span className={`flex h-[18px] w-[18px] items-center justify-center rounded ${filters.category === cat.slug ? "bg-brand" : "border-2 border-gray-300"}`}>
+            <label key={cat.id} className="mb-2.5 flex min-h-[36px] items-center gap-2.5 font-body text-[13px] cursor-pointer">
+              <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded ${filters.category === cat.slug ? "bg-brand" : "border-2 border-gray-300"}`}>
                 {filters.category === cat.slug && <span className="h-2 w-2 rounded-sm bg-white" />}
               </span>
               <button onClick={() => onFilterChange({ category: cat.slug, page: 1 })} className="text-left">
@@ -209,7 +209,7 @@ export default function CataloguePage() {
             {meta.total} offres disponibles{filters.city ? <> pres de <strong className="text-ink">{filters.city}</strong></> : ""}
           </p>
         </div>
-        <button onClick={() => setDrawerOpen(true)} className="flex h-10 items-center gap-2 rounded-lg bg-white px-3 text-sm font-semibold shadow-sm lg:hidden">
+        <button onClick={() => setDrawerOpen(true)} className="flex h-11 min-w-[44px] items-center gap-2 rounded-lg bg-white px-3 text-sm font-semibold shadow-sm lg:hidden">
           <Filter size={16} />
           Filtres
         </button>
@@ -277,17 +277,17 @@ export default function CataloguePage() {
           )}
 
           {meta.pageCount > 1 && (
-            <div className="mt-7 flex items-center justify-center gap-2">
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
               {pageNumbers().map((page, i) =>
                 typeof page === "string" ? (
-                  <span key={`ellipsis-${i}`} className="flex h-9 w-9 items-center justify-center text-sm text-muted">
+                  <span key={`ellipsis-${i}`} className="flex h-10 w-10 items-center justify-center text-sm text-muted">
                     {page}
                   </span>
                 ) : (
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
-                    className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold ${
                       page === meta.page ? "bg-brand text-white" : "bg-white text-ink shadow-sm hover:bg-gray-50"
                     }`}
                   >
@@ -302,8 +302,8 @@ export default function CataloguePage() {
 
       {drawerOpen && (
         <div className="fixed inset-0 z-50 bg-black/40 p-4 lg:hidden">
-          <div className="ml-auto h-full max-w-sm overflow-y-auto rounded-xl bg-page p-4">
-            <button className="mb-3 ml-auto flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm" onClick={() => setDrawerOpen(false)}>
+          <div className="ml-auto h-full max-w-sm overflow-y-auto rounded-xl bg-page p-4 pb-24">
+            <button className="mb-3 ml-auto flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm" onClick={() => setDrawerOpen(false)}>
               <X size={18} />
             </button>
             <FilterPanel categories={categories} filters={filters} onFilterChange={(updates) => { handleFilterChange(updates); setDrawerOpen(false); }} />

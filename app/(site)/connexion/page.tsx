@@ -35,7 +35,7 @@ export default function ConnexionPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] grid lg:grid-cols-2">
+    <div className="min-h-[calc(100vh-10rem)] md:min-h-[calc(100vh-4rem)] grid lg:grid-cols-2">
       {/* Form side */}
       <div className="flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
