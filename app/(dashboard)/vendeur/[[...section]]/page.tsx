@@ -13,7 +13,6 @@ import {
   PackageCheck,
   Plus,
   Search,
-  Settings,
   ShieldCheck,
   ShoppingBag,
   Star,

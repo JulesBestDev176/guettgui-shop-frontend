@@ -92,7 +92,7 @@ export default function AjouterProduitPage() {
                 <input type="checkbox" className="accent-[#22A849] w-4 h-4" />
                 <div>
                   <p className="text-sm font-medium text-[#1F2937]">Retrait en ferme uniquement</p>
-                  <p className="text-xs text-stone-400">L'acheteur doit venir chercher le produit</p>
+                  <p className="text-xs text-stone-400">L&apos;acheteur doit venir chercher le produit</p>
                 </div>
               </label>
             </div>

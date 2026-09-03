@@ -88,7 +88,27 @@ export function DashboardShell({
       .sort((a, b) => b.href.length - a.href.length)
       .find(({ href }) => pathname === href || pathname.startsWith(href + "/"))?.href ?? navItems[0]?.href;
 
-  const NavContent = () => (
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("charcutsn-user");
+      localStorage.removeItem("charcutsn-session");
+      localStorage.removeItem("charcutsn-role");
+      sessionStorage.clear();
+      document.cookie
+        .split(";")
+        .map((cookie) => cookie.split("=")[0]?.trim())
+        .filter(Boolean)
+        .forEach((name) => {
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        });
+    } finally {
+      setDrawerOpen(false);
+      router.replace("/connexion");
+      router.refresh();
+    }
+  };
+
+  const navContent = (
     <nav className="flex-1 space-y-1 px-3 py-4">
       {navItems.map(({ href, icon: Icon, label }) => {
         const active = href === activeHref;
@@ -112,27 +132,7 @@ export function DashboardShell({
     </nav>
   );
 
-  const handleLogout = () => {
-    try {
-      localStorage.removeItem("charcutsn-user");
-      localStorage.removeItem("charcutsn-session");
-      localStorage.removeItem("charcutsn-role");
-      sessionStorage.clear();
-      document.cookie
-        .split(";")
-        .map((cookie) => cookie.split("=")[0]?.trim())
-        .filter(Boolean)
-        .forEach((name) => {
-          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-        });
-    } finally {
-      setDrawerOpen(false);
-      router.replace("/connexion");
-      router.refresh();
-    }
-  };
-
-  const UserBlock = () => (
+  const userBlock = (
     <div className="border-t border-white/10 p-4">
       <div className="flex items-center gap-3">
         <div className={`flex h-9 w-9 items-center justify-center rounded-full ${roleColors[role]} text-sm font-bold text-white`}>
@@ -165,8 +165,8 @@ export function DashboardShell({
             {roleLabels[role]}
           </span>
         </div>
-        <NavContent />
-        <UserBlock />
+        {navContent}
+        {userBlock}
       </aside>
 
       {/* Mobile drawer */}
@@ -180,8 +180,8 @@ export function DashboardShell({
                 <X size={18} />
               </button>
             </div>
-            <NavContent />
-            <UserBlock />
+            {navContent}
+            {userBlock}
           </div>
         </div>
       )}

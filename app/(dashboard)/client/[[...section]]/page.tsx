@@ -263,7 +263,7 @@ function SecurityCard() {
         <ShieldCheck size={18} />
         Paiement protege
       </div>
-      <p className="font-body text-xs leading-5">Vos paiements Dexpay restent securises jusqu'a confirmation de livraison.</p>
+      <p className="font-body text-xs leading-5">Vos paiements Dexpay restent securises jusqu&apos;a confirmation de livraison.</p>
     </div>
   );
 }

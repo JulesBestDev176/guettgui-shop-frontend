@@ -21,7 +21,7 @@ export default function AdminDashboardPage() {
       <div className="p-6 max-w-6xl">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-[#1F2937]">Administration</h1>
-          <p className="text-stone-500 text-sm mt-1">Vue d'ensemble de la plateforme</p>
+          <p className="text-stone-500 text-sm mt-1">Vue d&apos;ensemble de la plateforme</p>
         </div>
 
         {/* Global stats */}
