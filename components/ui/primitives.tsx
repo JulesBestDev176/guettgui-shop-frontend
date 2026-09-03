@@ -4,7 +4,7 @@ import { HTMLAttributes } from "react";
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("bg-white rounded-2xl border border-[#E5E7EB] shadow-[0_2px_8px_rgba(0,0,0,0.04)]", className)}
+      className={cn("bg-white rounded-xl shadow-sm", className)}
       {...props}
     />
   );
@@ -32,9 +32,9 @@ export function Badge({ className, ...props }: HTMLAttributes<HTMLSpanElement>) 
 
 export function Progress({ value = 0, className }: { value?: number; className?: string }) {
   return (
-    <div className={cn("h-1.5 bg-stone-100 rounded-full overflow-hidden", className)}>
+    <div className={cn("h-1.5 bg-gray-100 rounded-full overflow-hidden", className)}>
       <div
-        className="h-full gradient-brand transition-all duration-500"
+        className="h-full bg-brand transition-all duration-500 rounded-full"
         style={{ width: `${value}%` }}
       />
     </div>
@@ -42,16 +42,16 @@ export function Progress({ value = 0, className }: { value?: number; className?:
 }
 
 export function Separator({ className }: { className?: string }) {
-  return <div className={cn("h-px bg-stone-100 w-full", className)} />;
+  return <div className={cn("h-px bg-gray-100 w-full", className)} />;
 }
 
 export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       className={cn(
-        "w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none",
-        "focus:border-[#B91C1C] focus:ring-2 focus:ring-[#B91C1C]/15 transition-all",
-        "placeholder:text-stone-400",
+        "w-full h-11 px-4 rounded-lg border border-gray-200 text-sm outline-none",
+        "focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all",
+        "placeholder:text-gray-400",
         className
       )}
       {...props}
@@ -63,9 +63,9 @@ export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<H
   return (
     <textarea
       className={cn(
-        "w-full px-4 py-3 rounded-xl border border-stone-200 text-sm outline-none resize-none",
-        "focus:border-[#B91C1C] focus:ring-2 focus:ring-[#B91C1C]/15 transition-all",
-        "placeholder:text-stone-400",
+        "w-full px-4 py-3 rounded-lg border border-gray-200 text-sm outline-none resize-none",
+        "focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all",
+        "placeholder:text-gray-400",
         className
       )}
       {...props}
@@ -77,8 +77,8 @@ export function Select({ className, ...props }: React.SelectHTMLAttributes<HTMLS
   return (
     <select
       className={cn(
-        "w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none bg-white",
-        "focus:border-[#B91C1C] focus:ring-2 focus:ring-[#B91C1C]/15 transition-all",
+        "w-full h-11 px-4 rounded-lg border border-gray-200 text-sm outline-none bg-white",
+        "focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all",
         className
       )}
       {...props}

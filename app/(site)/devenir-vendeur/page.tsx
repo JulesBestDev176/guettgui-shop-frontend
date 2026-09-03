@@ -21,11 +21,11 @@ export default function DevenirVendeurPage() {
   if (step === STEPS.length) {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-center">
-        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-[18px] bg-emerald-100">
-          <CheckCircle size={44} className="text-emerald-600" />
+        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-brand-soft">
+          <CheckCircle size={44} className="text-brand" />
         </div>
-        <h1 className="mb-3 text-2xl font-bold text-[#1F2937]">Dossier soumis</h1>
-        <p className="mb-6 text-sm leading-relaxed text-stone-500">
+        <h1 className="mb-3 text-2xl font-bold text-ink">Dossier soumis</h1>
+        <p className="mb-6 text-sm leading-relaxed text-muted">
           Votre dossier de vendeur est soumis. Notre equipe va verifier vos informations sous 24-48h. Vous serez notifie par SMS.
         </p>
         <Button size="lg" className="w-full">Retour a l&apos;accueil</Button>
@@ -35,23 +35,23 @@ export default function DevenirVendeurPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-      <section className="mb-5 rounded-[18px] bg-[#1F2937] p-5 text-white md:p-7">
+      <section className="mb-5 rounded-xl bg-ink p-5 text-white md:p-7">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="text-2xl font-extrabold tracking-[-0.4px] md:text-3xl">Devenir vendeur</h1>
-            <p className="font-body mt-2 max-w-xl text-sm leading-6 text-[#D1D5DB]">
+            <h1 className="text-2xl font-bold md:text-3xl">Devenir vendeur</h1>
+            <p className="font-body mt-2 max-w-xl text-sm leading-6 text-gray-400">
               Completez votre dossier vendeur en quelques minutes.
             </p>
           </div>
-          <div className="rounded-[14px] bg-white/10 px-4 py-3 text-left md:text-right">
-            <p className="font-body text-xs text-[#D1D5DB]">Etape en cours</p>
-            <p className="text-lg font-extrabold">{STEPS[step].title}</p>
+          <div className="rounded-lg bg-white/10 px-4 py-3 text-left md:text-right">
+            <p className="font-body text-xs text-gray-400">Etape en cours</p>
+            <p className="text-lg font-bold">{STEPS[step].title}</p>
           </div>
         </div>
         <Progress value={progress} className="mt-5 bg-white/15" />
       </section>
 
-      <section className="mb-5 rounded-[18px] border border-[#E5E7EB] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+      <section className="mb-5 rounded-xl bg-white p-4 shadow-sm">
         <div className="grid grid-cols-6 items-center">
           {STEPS.map(({ title }, i) => {
             const active = i === step;
@@ -67,15 +67,15 @@ export default function DevenirVendeurPage() {
                 className="group relative flex min-h-12 items-center justify-center"
               >
                 {i > 0 && (
-                  <span className={`absolute right-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 ${i <= step ? "bg-[#B91C1C]" : "bg-[#E5E7EB]"}`} />
+                  <span className={`absolute right-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 ${i <= step ? "bg-brand" : "bg-gray-200"}`} />
                 )}
                 <span
-                  className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm font-extrabold transition sm:h-11 sm:w-11 ${
+                  className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm font-bold transition sm:h-11 sm:w-11 ${
                     active
-                      ? "border-[#B91C1C] bg-[#B91C1C] text-white shadow-[0_8px_18px_rgba(185,28,28,.22)]"
+                      ? "border-brand bg-brand text-white"
                       : done
-                        ? "border-[#B91C1C] bg-white text-[#B91C1C]"
-                        : "border-[#E5E7EB] bg-[#FAFAFA] text-[#9CA3AF] group-hover:border-[#B91C1C]"
+                        ? "border-brand bg-white text-brand"
+                        : "border-gray-200 bg-page text-muted group-hover:border-brand"
                   }`}
                 >
                   {i + 1}
@@ -86,17 +86,17 @@ export default function DevenirVendeurPage() {
         </div>
         <div className="mt-3 flex items-center justify-between gap-3">
           <div>
-            <p className="font-body text-xs text-[#6B7280]">Etape {step + 1} sur {STEPS.length}</p>
-            <h2 className="text-lg font-extrabold text-[#1F2937]">{STEPS[step].title}</h2>
+            <p className="font-body text-xs text-muted">Etape {step + 1} sur {STEPS.length}</p>
+            <h2 className="text-lg font-bold text-ink">{STEPS[step].title}</h2>
           </div>
-          <span className="rounded-full bg-[#FEF2F2] px-3 py-1 text-xs font-bold text-[#B91C1C]">{Math.round(progress)}%</span>
+          <span className="rounded-full bg-brand-soft px-3 py-1 text-xs font-bold text-brand">{Math.round(progress)}%</span>
         </div>
       </section>
 
-      <section className="mb-6 rounded-[18px] border border-[#E5E7EB] bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] md:p-6">
-        <div className="mb-5 border-b border-[#F1F1F1] pb-4">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-[#B91C1C]">Etape {step + 1}</p>
-          <h2 className="mt-1 text-xl font-extrabold text-[#1F2937]">{STEPS[step].title}</h2>
+      <section className="mb-6 rounded-xl bg-white p-5 shadow-sm md:p-6">
+        <div className="mb-5 border-b border-gray-100 pb-4">
+          <p className="font-body text-xs font-semibold uppercase tracking-wide text-brand">Etape {step + 1}</p>
+          <h2 className="mt-1 text-xl font-bold text-ink">{STEPS[step].title}</h2>
         </div>
 
         {step === 0 && <ProfileStep />}
@@ -127,23 +127,23 @@ function ProfileStep() {
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Nom de la ferme / boutique</label>
+        <label className="text-xs font-semibold text-ink-light">Nom de la ferme / boutique</label>
         <Input placeholder="ex. Ferme Diallo" />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Telephone professionnel</label>
+        <label className="text-xs font-semibold text-ink-light">Telephone professionnel</label>
         <Input placeholder="+221 77 000 00 00" type="tel" />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Description</label>
+        <label className="text-xs font-semibold text-ink-light">Description</label>
         <Textarea rows={3} placeholder="Decrivez votre elevage, vos produits, votre savoir-faire" />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Type de production</label>
+        <label className="text-xs font-semibold text-ink-light">Type de production</label>
         <div className="flex flex-wrap gap-2">
           {["Poulet", "Dinde", "Canard", "Oeufs", "Lapin", "Autre"].map((type) => (
-            <label key={type} className="flex cursor-pointer items-center gap-1.5 rounded-xl border border-stone-200 px-3 py-1.5 text-xs font-medium transition-colors hover:border-[#B91C1C] has-[:checked]:border-[#B91C1C] has-[:checked]:bg-[#FEF2F2] has-[:checked]:text-[#B91C1C]">
-              <input type="checkbox" className="accent-[#B91C1C]" />
+            <label key={type} className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium transition-colors hover:border-brand has-[:checked]:border-brand has-[:checked]:bg-brand-soft has-[:checked]:text-brand">
+              <input type="checkbox" className="accent-brand" />
               {type}
             </label>
           ))}
@@ -157,22 +157,22 @@ function LocationStep() {
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Region</label>
-        <select className="h-11 w-full rounded-xl border border-stone-200 px-4 text-sm outline-none focus:border-[#B91C1C]">
+        <label className="text-xs font-semibold text-ink-light">Region</label>
+        <select className="h-11 w-full rounded-lg border border-gray-200 px-4 text-sm outline-none focus:border-brand">
           {["Dakar", "Thies", "Saint-Louis", "Ziguinchor", "Kaolack", "Diourbel", "Fatick", "Kolda", "Tambacounda", "Louga"].map((region) => (
             <option key={region}>{region}</option>
           ))}
         </select>
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Ville / Commune</label>
+        <label className="text-xs font-semibold text-ink-light">Ville / Commune</label>
         <Input placeholder="ex. Thies Nord" />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-stone-600">Adresse precise</label>
+        <label className="text-xs font-semibold text-ink-light">Adresse precise</label>
         <Input placeholder="Quartier, repere" />
       </div>
-      <div className="flex gap-2 rounded-xl bg-rose-50 p-4 text-sm text-rose-700">
+      <div className="flex gap-2 rounded-xl bg-brand-soft p-4 text-sm text-brand-dark">
         <MapPin size={16} className="mt-0.5 shrink-0" />
         <span>Votre localisation permet aux acheteurs de calculer les frais de livraison.</span>
       </div>
@@ -199,15 +199,15 @@ function PhotosStep() {
 
   return (
     <div className="space-y-4">
-      <p className="font-body text-sm text-[#6B7280]">Ajoutez quelques photos, nous verifierons apres.</p>
+      <p className="font-body text-sm text-muted">Ajoutez quelques photos, nous verifierons apres.</p>
 
-      <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-3 rounded-[16px] border-2 border-dashed border-[#E5E7EB] bg-[#FAFAFA] p-5 text-center transition hover:border-[#B91C1C] hover:bg-[#FEF2F2]">
+      <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-gray-200 bg-page p-5 text-center transition hover:border-brand hover:bg-brand-soft">
         <input type="file" accept="image/*" multiple className="hidden" onChange={handlePhotos} />
-        <span className="flex h-12 w-12 items-center justify-center rounded-[14px] bg-white text-[#B91C1C] shadow-sm">
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
           <Upload size={22} />
         </span>
-        <span className="text-sm font-extrabold text-[#1F2937]">Ajouter des photos</span>
-        <span className="font-body max-w-sm text-xs leading-5 text-[#6B7280]">
+        <span className="text-sm font-bold text-ink">Ajouter des photos</span>
+        <span className="font-body max-w-sm text-xs leading-5 text-muted">
           Selectionnez une ou plusieurs images depuis votre telephone ou ordinateur.
         </span>
       </label>
@@ -215,13 +215,13 @@ function PhotosStep() {
       {photos.length > 0 && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {photos.map((photo, index) => (
-            <div key={photo} className="group relative overflow-hidden rounded-[14px] border border-[#E5E7EB] bg-white">
+            <div key={photo} className="group relative overflow-hidden rounded-xl bg-white shadow-sm">
               <img src={photo} alt={`Photo ajoutee ${index + 1}`} className="aspect-square w-full object-cover" />
               <button
                 type="button"
                 onClick={() => setPhotos((current) => current.filter((_, photoIndex) => photoIndex !== index))}
                 aria-label="Supprimer cette photo"
-                className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-[#B91C1C] shadow-sm transition hover:bg-[#B91C1C] hover:text-white"
+                className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-red-500 shadow-sm transition hover:bg-red-500 hover:text-white"
               >
                 <Trash2 size={15} />
               </button>
@@ -231,7 +231,7 @@ function PhotosStep() {
       )}
 
       {photos.length === 0 && (
-        <div className="flex items-center gap-2 rounded-xl bg-[#FEF2F2] p-3 text-sm text-[#7F1D1D]">
+        <div className="flex items-center gap-2 rounded-xl bg-brand-soft p-3 text-sm text-brand-dark">
           <Camera size={16} className="shrink-0" />
           <span>Les photos aident juste a valider le vendeur. Elles pourront etre revues par l&apos;equipe.</span>
         </div>
@@ -250,22 +250,22 @@ function DocumentsStep() {
 
   return (
     <div className="space-y-3">
-      <p className="font-body text-sm text-[#6B7280]">La CNI ou le passeport est obligatoire. Les autres documents peuvent etre ajoutes plus tard.</p>
+      <p className="font-body text-sm text-muted">La CNI ou le passeport est obligatoire. Les autres documents peuvent etre ajoutes plus tard.</p>
       {documents.map((doc) => (
-        <div key={doc.label} className="flex items-center gap-3 rounded-xl border border-stone-200 p-3 sm:gap-4 sm:p-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-stone-100">
-            <FileText size={18} className="text-stone-400" />
+        <div key={doc.label} className="flex items-center gap-3 rounded-xl bg-page p-3 sm:gap-4 sm:p-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white">
+            <FileText size={18} className="text-muted" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <p className="text-sm font-semibold text-[#1F2937]">{doc.label}</p>
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${doc.required ? "bg-[#FEF2F2] text-[#B91C1C]" : "bg-[#F1F5F9] text-[#64748B]"}`}>
+              <p className="text-sm font-semibold text-ink">{doc.label}</p>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${doc.required ? "bg-brand-soft text-brand" : "bg-gray-100 text-muted"}`}>
                 {doc.required ? "Obligatoire" : "Optionnel"}
               </span>
             </div>
-            <p className="text-xs text-stone-400">{doc.desc}</p>
+            <p className="text-xs text-muted">{doc.desc}</p>
             {files[doc.label] && (
-              <p className="mt-1 truncate text-xs font-semibold text-[#15803D]">{files[doc.label]}</p>
+              <p className="mt-1 truncate text-xs font-semibold text-brand">{files[doc.label]}</p>
             )}
           </div>
           {files[doc.label] ? (
@@ -276,13 +276,13 @@ function DocumentsStep() {
                 delete next[doc.label];
                 return next;
               })}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-stone-200 text-[#B91C1C] transition hover:bg-[#FEF2F2]"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-red-500 transition hover:bg-red-50"
               aria-label="Retirer ce document"
             >
               <Trash2 size={15} />
             </button>
           ) : (
-            <label className="inline-flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-[10px] border border-stone-200 px-3 text-xs font-bold text-[#1F2937] transition hover:border-[#B91C1C] hover:text-[#B91C1C]">
+            <label className="inline-flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-white px-3 text-xs font-bold text-ink transition hover:text-brand">
               Ajouter
               <input
                 type="file"
@@ -313,12 +313,12 @@ function PaymentStep() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-stone-500">Choisissez comment recevoir vos paiements.</p>
+      <p className="text-sm text-muted">Choisissez comment recevoir vos paiements.</p>
       <div className="space-y-3">
         {methods.map((method) => (
-          <label key={method.id} className="flex cursor-pointer items-center gap-4 rounded-xl border-2 border-stone-200 p-4 transition-colors hover:border-[#B91C1C] has-[:checked]:border-[#B91C1C] has-[:checked]:bg-[#FEF2F2]">
-            <input type="radio" name="payout" className="accent-[#B91C1C]" />
-            <span className="flex h-12 w-16 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-stone-100">
+          <label key={method.id} className="flex cursor-pointer items-center gap-4 rounded-xl border-2 border-gray-200 p-4 transition-colors hover:border-brand has-[:checked]:border-brand has-[:checked]:bg-brand-soft">
+            <input type="radio" name="payout" className="accent-brand" />
+            <span className="flex h-12 w-16 items-center justify-center rounded-lg bg-white p-1.5 shadow-sm">
               <img src={method.logo} alt={method.label} className="max-h-full max-w-full object-contain" />
             </span>
             <span className="text-sm font-semibold">{method.label}</span>
@@ -333,17 +333,17 @@ function PaymentStep() {
 function LaunchStep() {
   return (
     <div className="space-y-4 py-4 text-center">
-      <div className="gradient-brand mx-auto flex h-20 w-20 items-center justify-center rounded-3xl">
+      <div className="bg-brand mx-auto flex h-20 w-20 items-center justify-center rounded-2xl">
         <Rocket size={36} className="text-white" />
       </div>
-      <h2 className="text-xl font-bold text-[#1F2937]">Pret a lancer ?</h2>
-      <p className="text-sm leading-relaxed text-stone-500">
+      <h2 className="text-xl font-bold text-ink">Pret a lancer ?</h2>
+      <p className="text-sm leading-relaxed text-muted">
         Verifiez vos informations et soumettez votre dossier. Notre equipe l&apos;examinera sous 24-48h.
       </p>
-      <div className="space-y-1.5 rounded-xl bg-[#FEF2F2] p-4 text-left text-sm">
+      <div className="space-y-1.5 rounded-xl bg-brand-soft p-4 text-left text-sm">
         {["Profil elevage complete", "Localisation renseignee", "Photos ajoutees", "Documents fournis", "Mode de paiement configure"].map((item) => (
-          <div key={item} className="flex items-center gap-2 text-[#7F1D1D]">
-            <CheckCircle size={14} className="shrink-0 text-emerald-600" />
+          <div key={item} className="flex items-center gap-2 text-brand-dark">
+            <CheckCircle size={14} className="shrink-0 text-brand" />
             {item}
           </div>
         ))}

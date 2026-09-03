@@ -72,7 +72,7 @@ const addresses = [
 ];
 
 const statusColor: Record<string, string> = {
-  "En livraison": "bg-[#FEE2E2] text-[#991B1B]",
+  "En livraison": "bg-[#F0FDF4] text-[#1A8A3A]",
   Livre: "bg-[#DCFCE7] text-[#15803D]",
   Annulee: "bg-[#F1F5F9] text-[#64748B]",
 };
@@ -106,7 +106,7 @@ function StatCard({ label, value, sub, icon: Icon, color }: { label: string; val
 
 function OrderRow({ order }: { order: (typeof orders)[number] }) {
   return (
-    <Link href={`/client/commandes/${order.id}`} className="grid gap-3 rounded-[14px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#B91C1C]/30 hover:bg-[#FAFAFA] md:grid-cols-[auto_1fr_auto_auto_auto] md:items-center">
+    <Link href={`/client/commandes/${order.id}`} className="grid gap-3 rounded-[14px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#22A849]/30 hover:bg-[#FAFAFA] md:grid-cols-[auto_1fr_auto_auto_auto] md:items-center">
       <img src={order.image} alt={order.id} className="h-12 w-12 rounded-[12px] object-cover" />
       <div className="min-w-0">
         <p className="font-semibold text-[#1F2937]">{order.id}</p>
@@ -127,7 +127,7 @@ function OverviewPage() {
     <>
       <section className="mb-6 grid gap-4 lg:grid-cols-[1.4fr_0.9fr]">
         <div className="relative overflow-hidden rounded-[18px] bg-[#1F2937] p-6 text-white shadow-[0_12px_32px_rgba(31,41,55,.16)]">
-          <div className="absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-[#B91C1C]/25" />
+          <div className="absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-[#22A849]/25" />
           <div className="relative">
             <p className="font-body text-sm text-[#9CA3AF]">Bonjour</p>
             <h1 className="mt-1 text-3xl font-extrabold tracking-[-0.6px]">Fatou Sarr</h1>
@@ -135,7 +135,7 @@ function OverviewPage() {
               Suivez vos commandes, retrouvez vos favoris et commandez rapidement vos produits frais.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/catalogue" className="inline-flex h-11 items-center justify-center gap-2 rounded-[11px] bg-[#B91C1C] px-5 text-sm font-bold text-white">
+              <Link href="/catalogue" className="inline-flex h-11 items-center justify-center gap-2 rounded-[11px] bg-[#22A849] px-5 text-sm font-bold text-white">
                 Commander
                 <ArrowRight size={16} />
               </Link>
@@ -152,7 +152,7 @@ function OverviewPage() {
               <p className="font-body text-xs text-[#6B7280]">Commande active</p>
               <h2 className="font-bold text-[#1F2937]">En livraison</h2>
             </div>
-            <Badge className="rounded-full bg-[#FEE2E2] px-3 py-1 text-[#991B1B]">Arrive a 14 h 30</Badge>
+            <Badge className="rounded-full bg-[#F0FDF4] px-3 py-1 text-[#1A8A3A]">Arrive a 14 h 30</Badge>
           </div>
           <div className="flex items-center gap-4 rounded-[14px] bg-[#FAFAFA] p-3">
             <img src={productImages.wholeChicken} alt="Commande en livraison" className="h-16 w-16 rounded-xl object-cover" />
@@ -160,7 +160,7 @@ function OverviewPage() {
               <p className="font-semibold text-[#1F2937]">Poulet de chair x2 + oeufs</p>
               <p className="font-body text-xs text-[#6B7280]">Ferme Keur Massar · Dakar Plateau</p>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#E5E7EB]">
-                <div className="h-full w-[72%] rounded-full bg-[#B91C1C]" />
+                <div className="h-full w-[72%] rounded-full bg-[#22A849]" />
               </div>
             </div>
           </div>
@@ -171,10 +171,10 @@ function OverviewPage() {
       </section>
 
       <section className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Commandes" value="12" sub="Total" icon={ShoppingBag} color="bg-[#FEF2F2] text-[#B91C1C]" />
-        <StatCard label="En cours" value="1" sub="Active" icon={Truck} color="bg-[#FEE2E2] text-[#991B1B]" />
+        <StatCard label="Commandes" value="12" sub="Total" icon={ShoppingBag} color="bg-[#F0FDF4] text-[#22A849]" />
+        <StatCard label="En cours" value="1" sub="Active" icon={Truck} color="bg-[#F0FDF4] text-[#1A8A3A]" />
         <StatCard label="Depense" value="148 000 F" sub="Ce mois" icon={Wallet} color="bg-[#F1F5F9] text-[#475569]" />
-        <StatCard label="Favoris" value="8" sub="Produits" icon={Heart} color="bg-[#FEF2F2] text-[#B91C1C]" />
+        <StatCard label="Favoris" value="8" sub="Produits" icon={Heart} color="bg-[#F0FDF4] text-[#22A849]" />
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1.3fr_0.8fr]">
@@ -197,7 +197,7 @@ function OrdersPanel({ compact = false }: { compact?: boolean }) {
           <h2 className="text-lg font-bold text-[#1F2937]">Commandes recentes</h2>
           <p className="font-body text-xs text-[#6B7280]">Vos dernieres commandes et leur statut</p>
         </div>
-        {compact && <Link href="/client/commandes" className="text-xs font-bold text-[#B91C1C]">Voir tout</Link>}
+        {compact && <Link href="/client/commandes" className="text-xs font-bold text-[#22A849]">Voir tout</Link>}
       </div>
       <div className="space-y-3">
         {(compact ? orders.slice(0, 3) : orders).map((order) => <OrderRow key={order.id} order={order} />)}
@@ -217,8 +217,8 @@ function QuickActions() {
           { label: "Adresses", href: "/client/adresses", icon: MapPin },
           { label: "Favoris", href: "/client/favoris", icon: Heart },
         ].map(({ label, href, icon: Icon }) => (
-          <Link key={label} href={href} className="rounded-[13px] border border-[#E5E7EB] bg-[#FAFAFA] p-3 text-center transition hover:border-[#B91C1C] hover:bg-[#FEF2F2]">
-            <Icon size={20} className="mx-auto mb-2 text-[#B91C1C]" />
+          <Link key={label} href={href} className="rounded-[13px] border border-[#E5E7EB] bg-[#FAFAFA] p-3 text-center transition hover:border-[#22A849] hover:bg-[#F0FDF4]">
+            <Icon size={20} className="mx-auto mb-2 text-[#22A849]" />
             <span className="text-xs font-semibold text-[#1F2937]">{label}</span>
           </Link>
         ))}
@@ -243,12 +243,12 @@ function FavoritesPanel({ compact = false }: { compact?: boolean }) {
               <p className="font-body text-xs text-[#6B7280]">{item.vendor} · {item.city}</p>
               {!compact && (
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="font-bold text-[#B91C1C]">{item.price}</span>
-                  <Link href="/catalogue" className="rounded-lg bg-[#B91C1C] px-3 py-2 text-xs font-bold text-white">Commander</Link>
+                  <span className="font-bold text-[#22A849]">{item.price}</span>
+                  <Link href="/catalogue" className="rounded-lg bg-[#22A849] px-3 py-2 text-xs font-bold text-white">Commander</Link>
                 </div>
               )}
             </div>
-            {compact && <p className="text-sm font-bold text-[#B91C1C]">{item.price}</p>}
+            {compact && <p className="text-sm font-bold text-[#22A849]">{item.price}</p>}
           </div>
         ))}
       </div>
@@ -274,11 +274,11 @@ function OrdersPage() {
       <PageHeader
         title="Mes commandes"
         subtitle="Consultez vos commandes, suivez les livraisons et retrouvez vos factures."
-        action={<Link href="/catalogue" className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white"><Plus size={16} /> Nouvelle commande</Link>}
+        action={<Link href="/catalogue" className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white"><Plus size={16} /> Nouvelle commande</Link>}
       />
       <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Total" value="12" sub="Commandes" icon={ShoppingBag} color="bg-[#FEF2F2] text-[#B91C1C]" />
-        <StatCard label="En livraison" value="1" sub="Active" icon={Truck} color="bg-[#FEE2E2] text-[#991B1B]" />
+        <StatCard label="Total" value="12" sub="Commandes" icon={ShoppingBag} color="bg-[#F0FDF4] text-[#22A849]" />
+        <StatCard label="En livraison" value="1" sub="Active" icon={Truck} color="bg-[#F0FDF4] text-[#1A8A3A]" />
         <StatCard label="Livrees" value="10" sub="OK" icon={PackageCheck} color="bg-[#DCFCE7] text-[#15803D]" />
         <StatCard label="Montant" value="148K" sub="Ce mois" icon={Wallet} color="bg-[#F1F5F9] text-[#475569]" />
       </div>
@@ -328,10 +328,10 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
                 return (
                   <div key={step.label} className="flex gap-3">
                     <div className="flex flex-col items-center">
-                      <div className={`flex h-9 w-9 items-center justify-center rounded-full ${done ? "bg-[#B91C1C] text-white" : "bg-[#F1F5F9] text-[#9CA3AF]"}`}>
+                      <div className={`flex h-9 w-9 items-center justify-center rounded-full ${done ? "bg-[#22A849] text-white" : "bg-[#F1F5F9] text-[#9CA3AF]"}`}>
                         {done ? <CheckCircle2 size={18} /> : <Clock size={17} />}
                       </div>
-                      {index < trackingSteps.length - 1 && <div className={`h-9 w-px ${index < activeIndex ? "bg-[#B91C1C]" : "bg-[#E5E7EB]"}`} />}
+                      {index < trackingSteps.length - 1 && <div className={`h-9 w-px ${index < activeIndex ? "bg-[#22A849]" : "bg-[#E5E7EB]"}`} />}
                     </div>
                     <div className="min-w-0 pb-3">
                       <p className="font-semibold text-[#1F2937]">{step.label}</p>
@@ -353,7 +353,7 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
                     <p className="font-semibold text-[#1F2937]">{line.name}</p>
                     <p className="font-body text-xs text-[#6B7280]">{line.qty}</p>
                   </div>
-                  <p className="text-sm font-extrabold text-[#B91C1C]">{line.price}</p>
+                  <p className="text-sm font-extrabold text-[#22A849]">{line.price}</p>
                 </div>
               ))}
             </div>
@@ -365,21 +365,21 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
             <h2 className="mb-4 text-lg font-bold text-[#1F2937]">Infos livraison</h2>
             <div className="space-y-4">
               <div className="flex gap-3">
-                <MapPin size={18} className="mt-0.5 text-[#B91C1C]" />
+                <MapPin size={18} className="mt-0.5 text-[#22A849]" />
                 <div>
                   <p className="font-semibold text-[#1F2937]">{order.address}</p>
                   <p className="font-body text-xs text-[#6B7280]">Adresse client</p>
                 </div>
               </div>
               <div className="flex gap-3">
-                <Truck size={18} className="mt-0.5 text-[#B91C1C]" />
+                <Truck size={18} className="mt-0.5 text-[#22A849]" />
                 <div>
                   <p className="font-semibold text-[#1F2937]">{order.driver}</p>
                   <p className="font-body text-xs text-[#6B7280]">{order.phone}</p>
                 </div>
               </div>
               <div className="flex gap-3">
-                <CreditCard size={18} className="mt-0.5 text-[#B91C1C]" />
+                <CreditCard size={18} className="mt-0.5 text-[#22A849]" />
                 <div>
                   <p className="font-semibold text-[#1F2937]">{order.payment}</p>
                   <p className="font-body text-xs text-[#6B7280]">Paiement securise</p>
@@ -388,7 +388,7 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
             </div>
           </div>
 
-          <Link href="/support" className="flex h-11 items-center justify-center rounded-[11px] bg-[#B91C1C] px-4 text-sm font-bold text-white">
+          <Link href="/support" className="flex h-11 items-center justify-center rounded-[11px] bg-[#22A849] px-4 text-sm font-bold text-white">
             Contacter le support
           </Link>
         </aside>
@@ -412,13 +412,13 @@ function AddressesPage() {
       <PageHeader
         title="Adresses"
         subtitle="Gerez vos lieux de livraison frequents."
-        action={<button className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter</button>}
+        action={<button className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter</button>}
       />
       <div className="grid gap-4 lg:grid-cols-3">
         {addresses.map((address) => (
           <div key={address.label} className="rounded-[18px] border border-[#E5E7EB] bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,.04)]">
             <div className="mb-4 flex items-start justify-between gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-[12px] bg-[#FEF2F2] text-[#B91C1C]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-[12px] bg-[#F0FDF4] text-[#22A849]">
                 {address.label === "Maison" ? <Home size={20} /> : <MapPin size={20} />}
               </div>
               {address.active && <Badge className="rounded-full bg-[#DCFCE7] text-[#15803D]">Defaut</Badge>}
@@ -428,7 +428,7 @@ function AddressesPage() {
             <p className="font-body mt-2 text-xs text-[#9CA3AF]">{address.note}</p>
             <div className="mt-5 flex gap-2">
               <button className="inline-flex h-9 flex-1 items-center justify-center gap-2 rounded-[10px] border border-[#E5E7EB] text-xs font-bold text-[#1F2937]"><Edit3 size={14} /> Modifier</button>
-              <button className="inline-flex h-9 w-10 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#B91C1C]"><Trash2 size={14} /></button>
+              <button className="inline-flex h-9 w-10 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#22A849]"><Trash2 size={14} /></button>
             </div>
           </div>
         ))}
@@ -443,7 +443,7 @@ function ProfilePage() {
       <PageHeader title="Mon profil" subtitle="Vos informations personnelles et preferences de paiement." />
       <div className="grid gap-6 xl:grid-cols-[0.9fr_1.3fr]">
         <div className="rounded-[18px] border border-[#E5E7EB] bg-white p-6 text-center shadow-[0_2px_8px_rgba(0,0,0,.04)]">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#B91C1C] text-2xl font-extrabold text-white">FS</div>
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#22A849] text-2xl font-extrabold text-white">FS</div>
           <h2 className="mt-4 text-xl font-bold text-[#1F2937]">Fatou Sarr</h2>
           <p className="font-body text-sm text-[#6B7280]">Cliente depuis juin 2026</p>
           <div className="mt-5 grid grid-cols-2 gap-3">
@@ -468,13 +468,13 @@ function ProfilePage() {
               { label: "Paiement", value: "Dexpay active", icon: CreditCard },
             ].map(({ label, value, icon: Icon }) => (
               <div key={label} className="rounded-[14px] border border-[#F1F1F1] bg-[#FAFAFA] p-4">
-                <Icon size={18} className="mb-3 text-[#B91C1C]" />
+                <Icon size={18} className="mb-3 text-[#22A849]" />
                 <p className="font-body text-xs text-[#6B7280]">{label}</p>
                 <p className="mt-1 font-semibold text-[#1F2937]">{value}</p>
               </div>
             ))}
           </div>
-          <button className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white">
+          <button className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white">
             <Edit3 size={15} /> Modifier le profil
           </button>
         </div>

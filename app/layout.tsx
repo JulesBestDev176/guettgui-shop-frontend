@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Charcut'SN — Volaille fraîche du Sénégal",
-  description: "Marketplace de volaille fraîche et produits avicoles du Sénégal",
+  title: "Guett Gui — L'elevage, notre passion",
+  description: "Marketplace de volaille fraiche au Senegal. Achetez en confiance aupres de vendeurs verifies.",
 };
 
 export default function RootLayout({

@@ -56,7 +56,7 @@ const deliveryZones = [
 ];
 
 const statusColor: Record<string, string> = {
-  Nouvelle: "bg-[#FEF2F2] text-[#B91C1C]",
+  Nouvelle: "bg-[#F0FDF4] text-[#22A849]",
   Preparation: "bg-[#FFF7ED] text-[#C2410C]",
   Expediee: "bg-[#EFF6FF] text-[#2563EB]",
   Livree: "bg-[#DCFCE7] text-[#15803D]",
@@ -93,7 +93,7 @@ function StatCard({ label, value, sub, icon: Icon, color }: { label: string; val
 
 function OrderRow({ order }: { order: (typeof sellerOrders)[number] }) {
   return (
-    <Link href={`/vendeur/commandes/${order.id}`} className="grid gap-3 rounded-[14px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#B91C1C]/30 hover:bg-[#FAFAFA] md:grid-cols-[auto_1fr_auto_auto_auto] md:items-center">
+    <Link href={`/vendeur/commandes/${order.id}`} className="grid gap-3 rounded-[14px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#22A849]/30 hover:bg-[#FAFAFA] md:grid-cols-[auto_1fr_auto_auto_auto] md:items-center">
       <img src={order.image} alt={order.id} className="h-12 w-12 rounded-[12px] object-cover" />
       <div className="min-w-0">
         <p className="font-semibold text-[#1F2937]">{order.id}</p>
@@ -120,14 +120,14 @@ function ProductCard({ product }: { product: (typeof sellerProducts)[number] }) 
         </div>
         <div className="mt-4 flex items-center justify-between gap-3">
           <div>
-            <p className="text-lg font-extrabold text-[#B91C1C]">{product.price}</p>
+            <p className="text-lg font-extrabold text-[#22A849]">{product.price}</p>
             <p className="font-body text-xs text-[#6B7280]">{product.stock > 0 ? `${product.stock} en stock` : "Stock epuise"}</p>
           </div>
           <div className="flex gap-2">
-            <button className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#1F2937] transition hover:border-[#B91C1C] hover:text-[#B91C1C]">
+            <button className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#1F2937] transition hover:border-[#22A849] hover:text-[#22A849]">
               <Edit3 size={15} />
             </button>
-            <button className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#B91C1C] transition hover:bg-[#FEF2F2]">
+            <button className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-[#E5E7EB] text-[#22A849] transition hover:bg-[#F0FDF4]">
               <Trash2 size={15} />
             </button>
           </div>
@@ -142,7 +142,7 @@ function OverviewPage() {
     <>
       <section className="mb-6 grid gap-4 xl:grid-cols-[1.35fr_0.8fr]">
         <div className="relative overflow-hidden rounded-[18px] bg-[#1F2937] p-6 text-white shadow-[0_12px_32px_rgba(31,41,55,.16)]">
-          <div className="absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-[#B91C1C]/25" />
+          <div className="absolute right-0 top-0 h-40 w-40 translate-x-12 -translate-y-12 rounded-full bg-[#22A849]/25" />
           <div className="relative">
             <p className="font-body text-sm text-[#9CA3AF]">Bienvenue</p>
             <h1 className="mt-1 text-3xl font-extrabold tracking-[-0.6px]">Ferme Diallo</h1>
@@ -150,7 +150,7 @@ function OverviewPage() {
               Suivez vos ventes, preparez les commandes et gardez votre inventaire a jour.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/vendeur/produits/ajouter" className="inline-flex h-11 items-center justify-center gap-2 rounded-[11px] bg-[#B91C1C] px-5 text-sm font-bold text-white">
+              <Link href="/vendeur/produits/ajouter" className="inline-flex h-11 items-center justify-center gap-2 rounded-[11px] bg-[#22A849] px-5 text-sm font-bold text-white">
                 <Plus size={16} />
                 Ajouter produit
               </Link>
@@ -170,13 +170,13 @@ function OverviewPage() {
               <p className="font-body text-xs text-[#6B7280]">A traiter</p>
               <h2 className="font-bold text-[#1F2937]">Nouvelle commande</h2>
             </div>
-            <Badge className="rounded-full bg-[#FEF2F2] px-3 py-1 text-[#B91C1C]">Priorite</Badge>
+            <Badge className="rounded-full bg-[#F0FDF4] px-3 py-1 text-[#22A849]">Priorite</Badge>
           </div>
           <div className="rounded-[14px] bg-[#FAFAFA] p-4">
             <p className="font-semibold text-[#1F2937]">CMD-20260626-0042</p>
             <p className="font-body mt-1 text-xs text-[#6B7280]">Fatou Sarr · Poulet entier x2, oeufs x1</p>
             <div className="mt-4 flex items-center justify-between">
-              <span className="text-xl font-extrabold text-[#B91C1C]">17 200 F</span>
+              <span className="text-xl font-extrabold text-[#22A849]">17 200 F</span>
               <Link href="/vendeur/commandes/CMD-20260626-0042" className="rounded-[10px] bg-[#1F2937] px-4 py-2 text-xs font-bold text-white">Ouvrir</Link>
             </div>
           </div>
@@ -184,7 +184,7 @@ function OverviewPage() {
       </section>
 
       <section className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Ventes ce mois" value="287K" sub="+18%" icon={Wallet} color="bg-[#FEF2F2] text-[#B91C1C]" />
+        <StatCard label="Ventes ce mois" value="287K" sub="+18%" icon={Wallet} color="bg-[#F0FDF4] text-[#22A849]" />
         <StatCard label="Commandes" value="42" sub="+6" icon={ShoppingBag} color="bg-[#EFF6FF] text-[#2563EB]" />
         <StatCard label="Produits actifs" value="8" sub="sur 11" icon={Package} color="bg-[#DCFCE7] text-[#15803D]" />
         <StatCard label="Note moyenne" value="4.8" sub="34 avis" icon={Star} color="bg-[#FFF7ED] text-[#C2410C]" />
@@ -206,7 +206,7 @@ function OrdersPanel({ compact = false }: { compact?: boolean }) {
           <h2 className="text-lg font-bold text-[#1F2937]">Commandes</h2>
           <p className="font-body text-xs text-[#6B7280]">Demandes client et suivi preparation</p>
         </div>
-        {compact && <Link href="/vendeur/commandes" className="text-xs font-bold text-[#B91C1C]">Voir tout</Link>}
+        {compact && <Link href="/vendeur/commandes" className="text-xs font-bold text-[#22A849]">Voir tout</Link>}
       </div>
       <div className="space-y-3">
         {(compact ? sellerOrders.slice(0, 3) : sellerOrders).map((order) => <OrderRow key={order.id} order={order} />)}
@@ -223,7 +223,7 @@ function InventoryPanel() {
           <h2 className="text-lg font-bold text-[#1F2937]">Inventaire</h2>
           <p className="font-body text-xs text-[#6B7280]">Produits a surveiller</p>
         </div>
-        <Link href="/vendeur/produits" className="text-xs font-bold text-[#B91C1C]">Gerer</Link>
+        <Link href="/vendeur/produits" className="text-xs font-bold text-[#22A849]">Gerer</Link>
       </div>
       <div className="space-y-3">
         {sellerProducts.slice(0, 4).map((product) => (
@@ -233,7 +233,7 @@ function InventoryPanel() {
               <p className="truncate text-sm font-semibold text-[#1F2937]">{product.name}</p>
               <p className="font-body text-xs text-[#6B7280]">{product.stock > 0 ? `${product.stock} disponibles` : "Rupture de stock"}</p>
             </div>
-            <p className="text-sm font-bold text-[#B91C1C]">{product.price}</p>
+            <p className="text-sm font-bold text-[#22A849]">{product.price}</p>
           </div>
         ))}
       </div>
@@ -247,7 +247,7 @@ function ProductsPage() {
       <PageHeader
         title="Mes produits"
         subtitle="Ajoutez, modifiez et suivez vos produits disponibles."
-        action={<Link href="/vendeur/produits/ajouter" className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter</Link>}
+        action={<Link href="/vendeur/produits/ajouter" className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter</Link>}
       />
       <div className="mb-5 grid gap-4 md:grid-cols-[1fr_auto]">
         <div className="flex h-11 items-center gap-2 rounded-[12px] border border-[#E5E7EB] bg-white px-3">
@@ -272,7 +272,7 @@ function OrdersPage() {
     <>
       <PageHeader title="Commandes" subtitle="Traitez les commandes entrantes et suivez les livraisons." />
       <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Nouvelles" value="8" sub="A traiter" icon={ShoppingBag} color="bg-[#FEF2F2] text-[#B91C1C]" />
+        <StatCard label="Nouvelles" value="8" sub="A traiter" icon={ShoppingBag} color="bg-[#F0FDF4] text-[#22A849]" />
         <StatCard label="Preparation" value="12" sub="En cours" icon={Clock} color="bg-[#FFF7ED] text-[#C2410C]" />
         <StatCard label="Expediees" value="6" sub="Livreur" icon={Truck} color="bg-[#EFF6FF] text-[#2563EB]" />
         <StatCard label="Livrees" value="24" sub="OK" icon={PackageCheck} color="bg-[#DCFCE7] text-[#15803D]" />
@@ -320,8 +320,8 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
               {steps.map((label, index) => {
                 const done = index <= activeIndex;
                 return (
-                  <div key={label} className={`rounded-[14px] border p-4 ${done ? "border-[#B91C1C] bg-[#FEF2F2]" : "border-[#E5E7EB] bg-[#FAFAFA]"}`}>
-                    <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-full ${done ? "bg-[#B91C1C] text-white" : "bg-white text-[#9CA3AF]"}`}>
+                  <div key={label} className={`rounded-[14px] border p-4 ${done ? "border-[#22A849] bg-[#F0FDF4]" : "border-[#E5E7EB] bg-[#FAFAFA]"}`}>
+                    <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-full ${done ? "bg-[#22A849] text-white" : "bg-white text-[#9CA3AF]"}`}>
                       {done ? <CheckCircle2 size={17} /> : index + 1}
                     </div>
                     <p className="text-sm font-bold text-[#1F2937]">{label}</p>
@@ -342,7 +342,7 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
             </div>
           </div>
           <div className="grid gap-3">
-            <button className="h-11 rounded-[11px] bg-[#B91C1C] px-4 text-sm font-bold text-white">Marquer en preparation</button>
+            <button className="h-11 rounded-[11px] bg-[#22A849] px-4 text-sm font-bold text-white">Marquer en preparation</button>
             <button className="h-11 rounded-[11px] border border-[#E5E7EB] bg-white px-4 text-sm font-bold text-[#1F2937]">Contacter le client</button>
           </div>
         </aside>
@@ -354,7 +354,7 @@ function OrderDetailPage({ orderId }: { orderId: string }) {
 function InfoLine({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
   return (
     <div className="flex gap-3">
-      <Icon size={18} className="mt-0.5 text-[#B91C1C]" />
+      <Icon size={18} className="mt-0.5 text-[#22A849]" />
       <div>
         <p className="font-semibold text-[#1F2937]">{value}</p>
         <p className="font-body text-xs text-[#6B7280]">{label}</p>
@@ -376,7 +376,7 @@ function StatsPage() {
     <>
       <PageHeader title="Statistiques" subtitle="Analyse des ventes, produits et performances de la boutique." />
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="CA mensuel" value="287K" sub="+18%" icon={TrendingUp} color="bg-[#FEF2F2] text-[#B91C1C]" />
+        <StatCard label="CA mensuel" value="287K" sub="+18%" icon={TrendingUp} color="bg-[#F0FDF4] text-[#22A849]" />
         <StatCard label="Panier moyen" value="9 850 F" sub="+7%" icon={Wallet} color="bg-[#DCFCE7] text-[#15803D]" />
         <StatCard label="Vues produits" value="1 284" sub="+21%" icon={Eye} color="bg-[#EFF6FF] text-[#2563EB]" />
         <StatCard label="Conversion" value="8.4%" sub="+2%" icon={BarChart3} color="bg-[#FFF7ED] text-[#C2410C]" />
@@ -389,7 +389,7 @@ function StatsPage() {
               <div key={row.label} className="grid grid-cols-[80px_1fr_52px] items-center gap-3">
                 <p className="font-body text-xs text-[#6B7280]">{row.label}</p>
                 <div className="h-3 overflow-hidden rounded-full bg-[#F1F5F9]">
-                  <div className="h-full rounded-full bg-[#B91C1C]" style={{ width: row.width }} />
+                  <div className="h-full rounded-full bg-[#22A849]" style={{ width: row.width }} />
                 </div>
                 <p className="text-right text-sm font-bold text-[#1F2937]">{row.value}</p>
               </div>
@@ -401,7 +401,7 @@ function StatsPage() {
           <div className="space-y-3">
             {sellerProducts.slice(0, 3).map((product, index) => (
               <div key={product.id} className="flex items-center gap-3 rounded-[14px] bg-[#FAFAFA] p-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#B91C1C] text-xs font-bold text-white">{index + 1}</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#22A849] text-xs font-bold text-white">{index + 1}</span>
                 <img src={product.image} alt={product.name} className="h-11 w-11 rounded-[10px] object-cover" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-[#1F2937]">{product.name}</p>
@@ -422,11 +422,11 @@ function DeliveryPage() {
       <PageHeader
         title="Zones de livraison"
         subtitle="Definissez ou vous livrez, les frais, les delais et le minimum de commande."
-        action={<button className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter zone</button>}
+        action={<button className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white"><Plus size={16} /> Ajouter zone</button>}
       />
 
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Zones actives" value="3" sub="sur 4" icon={MapPin} color="bg-[#FEF2F2] text-[#B91C1C]" />
+        <StatCard label="Zones actives" value="3" sub="sur 4" icon={MapPin} color="bg-[#F0FDF4] text-[#22A849]" />
         <StatCard label="Commandes zone" value="52" sub="ce mois" icon={Truck} color="bg-[#EFF6FF] text-[#2563EB]" />
         <StatCard label="Frais moyens" value="2 800 F" sub="livraison" icon={Wallet} color="bg-[#DCFCE7] text-[#15803D]" />
         <StatCard label="Delai moyen" value="1 h 20" sub="estime" icon={Clock} color="bg-[#FFF7ED] text-[#C2410C]" />
@@ -448,10 +448,10 @@ function DeliveryPage() {
 
           <div className="space-y-3">
             {deliveryZones.map((zone) => (
-              <div key={zone.name} className="rounded-[15px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#B91C1C]/30 hover:bg-[#FAFAFA]">
+              <div key={zone.name} className="rounded-[15px] border border-[#F1F1F1] bg-white p-4 transition hover:border-[#22A849]/30 hover:bg-[#FAFAFA]">
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="flex min-w-0 items-start gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#FEF2F2] text-[#B91C1C]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#F0FDF4] text-[#22A849]">
                       <MapPin size={19} />
                     </div>
                     <div className="min-w-0">
@@ -471,10 +471,10 @@ function DeliveryPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex gap-2">
-                  <button className="inline-flex h-9 flex-1 items-center justify-center gap-2 rounded-[10px] border border-[#E5E7EB] text-xs font-bold text-[#1F2937] transition hover:border-[#B91C1C] hover:text-[#B91C1C]">
+                  <button className="inline-flex h-9 flex-1 items-center justify-center gap-2 rounded-[10px] border border-[#E5E7EB] text-xs font-bold text-[#1F2937] transition hover:border-[#22A849] hover:text-[#22A849]">
                     <Edit3 size={14} /> Modifier
                   </button>
-                  <button className={`inline-flex h-9 flex-1 items-center justify-center rounded-[10px] text-xs font-bold ${zone.active ? "bg-[#F1F5F9] text-[#64748B]" : "bg-[#B91C1C] text-white"}`}>
+                  <button className={`inline-flex h-9 flex-1 items-center justify-center rounded-[10px] text-xs font-bold ${zone.active ? "bg-[#F1F5F9] text-[#64748B]" : "bg-[#22A849] text-white"}`}>
                     {zone.active ? "Desactiver" : "Activer"}
                   </button>
                 </div>
@@ -489,23 +489,23 @@ function DeliveryPage() {
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#6B7280]">Nom de la zone</label>
-                <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#B91C1C]" placeholder="ex. Rufisque" />
+                <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#22A849]" placeholder="ex. Rufisque" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-[#6B7280]">Frais</label>
-                  <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#B91C1C]" placeholder="3000 F" />
+                  <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#22A849]" placeholder="3000 F" />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-[#6B7280]">Delai</label>
-                  <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#B91C1C]" placeholder="1 h" />
+                  <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#22A849]" placeholder="1 h" />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#6B7280]">Minimum commande</label>
-                <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#B91C1C]" placeholder="10000 F" />
+                <input className="h-11 w-full rounded-[12px] border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#22A849]" placeholder="10000 F" />
               </div>
-              <button className="h-11 w-full rounded-[11px] bg-[#B91C1C] text-sm font-bold text-white">Enregistrer zone</button>
+              <button className="h-11 w-full rounded-[11px] bg-[#22A849] text-sm font-bold text-white">Enregistrer zone</button>
             </div>
           </div>
 
@@ -544,7 +544,7 @@ function SettingsPage() {
             <SettingBox icon={User} label="Responsable" value="Mamadou Diallo" />
             <SettingBox icon={ShieldCheck} label="Verification" value="Compte valide" />
           </div>
-          <button className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#B91C1C] px-4 text-sm font-bold text-white">
+          <button className="mt-5 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#22A849] px-4 text-sm font-bold text-white">
             <Edit3 size={15} /> Modifier boutique
           </button>
         </div>
@@ -553,8 +553,8 @@ function SettingsPage() {
           <h2 className="mb-5 text-lg font-bold text-[#1F2937]">Paiements</h2>
           <div className="space-y-3">
             {payoutMethods.map((method) => (
-              <label key={method.label} className="flex cursor-pointer items-center gap-3 rounded-[14px] border border-[#E5E7EB] p-3 transition hover:border-[#B91C1C] has-[:checked]:border-[#B91C1C] has-[:checked]:bg-[#FEF2F2]">
-                <input type="radio" name="seller-payout" className="accent-[#B91C1C]" defaultChecked={method.label === "Wave"} />
+              <label key={method.label} className="flex cursor-pointer items-center gap-3 rounded-[14px] border border-[#E5E7EB] p-3 transition hover:border-[#22A849] has-[:checked]:border-[#22A849] has-[:checked]:bg-[#F0FDF4]">
+                <input type="radio" name="seller-payout" className="accent-[#22A849]" defaultChecked={method.label === "Wave"} />
                 <span className="flex h-12 w-16 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-stone-100">
                   <img src={method.logo} alt={method.label} className="max-h-full max-w-full object-contain" />
                 </span>
@@ -574,7 +574,7 @@ function SettingsPage() {
 function SettingBox({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
   return (
     <div className="rounded-[14px] border border-[#F1F1F1] bg-[#FAFAFA] p-4">
-      <Icon size={18} className="mb-3 text-[#B91C1C]" />
+      <Icon size={18} className="mb-3 text-[#22A849]" />
       <p className="font-body text-xs text-[#6B7280]">{label}</p>
       <p className="mt-1 font-semibold text-[#1F2937]">{value}</p>
     </div>

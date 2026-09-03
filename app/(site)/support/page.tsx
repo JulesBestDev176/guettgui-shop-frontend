@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/primitives";
 
 const faqs = [
-  { q: "Comment passer une commande ?", a: "Parcourez notre catalogue, ajoutez des produits à votre panier et finalisez votre commande en choisissant votre mode de livraison et de paiement." },
-  { q: "Quels sont les modes de paiement acceptés ?", a: "Nous acceptons Wave, Orange Money, et le paiement en espèces à la livraison. D'autres méthodes seront bientôt disponibles." },
-  { q: "Quelle est la zone de livraison ?", a: "Nous livrons actuellement dans tout le Grand Dakar (Dakar, Pikine, Guédiawaye, Rufisque, Bargny). D'autres zones sont en cours d'expansion." },
-  { q: "Comment devenir vendeur sur la plateforme ?", a: "Cliquez sur 'Devenir vendeur', complétez le formulaire en 6 étapes avec vos informations et documents, puis notre équipe validera votre dossier sous 24–48h." },
-  { q: "Que faire si ma commande est endommagée ?", a: "Contactez-nous dans les 2h suivant la réception avec des photos. Nous procéderons à un remboursement ou remplacement immédiat." },
-  { q: "Comment suivre ma commande ?", a: "Rendez-vous dans la section 'Suivi commande' et entrez votre numéro de commande. Vous pouvez aussi activer les notifications SMS." },
+  { q: "Comment passer une commande ?", a: "Parcourez notre catalogue, ajoutez des produits a votre panier et finalisez votre commande en choisissant votre mode de livraison et de paiement." },
+  { q: "Quels sont les modes de paiement acceptes ?", a: "Nous acceptons Wave, Orange Money, et le paiement en especes a la livraison. D'autres methodes seront bientot disponibles." },
+  { q: "Quelle est la zone de livraison ?", a: "Nous livrons actuellement dans tout le Grand Dakar (Dakar, Pikine, Guediawaye, Rufisque, Bargny). D'autres zones sont en cours d'expansion." },
+  { q: "Comment devenir vendeur sur la plateforme ?", a: "Cliquez sur 'Devenir vendeur', completez le formulaire en 6 etapes avec vos informations et documents, puis notre equipe validera votre dossier sous 24-48h." },
+  { q: "Que faire si ma commande est endommagee ?", a: "Contactez-nous dans les 2h suivant la reception avec des photos. Nous procederons a un remboursement ou remplacement immediat." },
+  { q: "Comment suivre ma commande ?", a: "Rendez-vous dans la section 'Suivi commande' et entrez votre numero de commande. Vous pouvez aussi activer les notifications SMS." },
 ];
 
 export default function SupportPage() {
@@ -19,10 +19,10 @@ export default function SupportPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="gradient-hero text-white py-14 px-4 text-center">
-        <h1 className="text-3xl font-bold mb-3">Centre d'aide</h1>
-        <p className="text-white/80 text-sm max-w-md mx-auto">
-          Notre équipe est disponible 7j/7 pour vous aider. Comment pouvons-nous vous aider aujourd'hui ?
+      <section className="bg-ink text-white py-14 px-4 text-center">
+        <h1 className="text-3xl font-bold mb-3">Centre d&apos;aide</h1>
+        <p className="text-gray-400 text-sm max-w-md mx-auto">
+          Notre equipe est disponible 7j/7 pour vous aider. Comment pouvons-nous vous aider aujourd&apos;hui ?
         </p>
       </section>
 
@@ -30,17 +30,17 @@ export default function SupportPage() {
         {/* Contact channels */}
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           {[
-            { icon: Phone, label: "Téléphone", value: "+221 33 800 00 00", desc: "Lun–Sam 8h–20h", color: "text-emerald-600 bg-emerald-50" },
-            { icon: MessageCircle, label: "WhatsApp", value: "Chat en direct", desc: "Réponse en < 30 min", color: "text-[#B91C1C] bg-[#FEF2F2]" },
-            { icon: Mail, label: "Email", value: "support@charcutsn.com", desc: "Réponse en 2h", color: "text-blue-600 bg-blue-50" },
+            { icon: Phone, label: "Telephone", value: "+221 33 800 00 00", desc: "Lun-Sam 8h-20h", color: "text-brand bg-brand-soft" },
+            { icon: MessageCircle, label: "WhatsApp", value: "Chat en direct", desc: "Reponse en < 30 min", color: "text-brand bg-brand-soft" },
+            { icon: Mail, label: "Email", value: "support@guettgui.sn", desc: "Reponse en 2h", color: "text-brand bg-brand-soft" },
           ].map(({ icon: Icon, label, value, desc, color }) => (
-            <div key={label} className="bg-white rounded-2xl border border-stone-100 p-5 text-center shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-              <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
+            <div key={label} className="bg-white rounded-xl p-5 text-center shadow-sm">
+              <div className={`w-12 h-12 ${color} rounded-lg flex items-center justify-center mx-auto mb-3`}>
                 <Icon size={20} />
               </div>
-              <h3 className="font-bold text-[#1F2937] text-sm">{label}</h3>
-              <p className="text-[#B91C1C] font-semibold text-sm mt-1">{value}</p>
-              <p className="text-xs text-stone-400 mt-0.5">{desc}</p>
+              <h3 className="font-bold text-ink text-sm">{label}</h3>
+              <p className="text-brand font-semibold text-sm mt-1">{value}</p>
+              <p className="text-xs text-muted mt-0.5">{desc}</p>
             </div>
           ))}
         </div>
@@ -48,23 +48,23 @@ export default function SupportPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* FAQ */}
           <div>
-            <h2 className="text-xl font-bold text-[#1F2937] mb-5">Questions fréquentes</h2>
-            <div className="space-y-3">
+            <h2 className="text-xl font-bold text-ink mb-5">Questions frequentes</h2>
+            <div className="space-y-2">
               {faqs.map((faq, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-stone-100 overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm">
                   <button
-                    className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-stone-50 transition-colors"
+                    className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-page transition-colors"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
-                    <span className="font-semibold text-sm text-[#1F2937]">{faq.q}</span>
+                    <span className="font-semibold text-sm text-ink">{faq.q}</span>
                     {openFaq === i ? (
-                      <ChevronUp size={16} className="text-[#B91C1C] shrink-0" />
+                      <ChevronUp size={16} className="text-brand shrink-0" />
                     ) : (
-                      <ChevronDown size={16} className="text-stone-400 shrink-0" />
+                      <ChevronDown size={16} className="text-muted shrink-0" />
                     )}
                   </button>
                   {openFaq === i && (
-                    <div className="px-4 pb-4 text-sm text-stone-500 leading-relaxed border-t border-stone-100 pt-3">
+                    <div className="px-4 pb-4 text-sm text-muted leading-relaxed border-t border-gray-100 pt-3">
                       {faq.a}
                     </div>
                   )}
@@ -75,27 +75,27 @@ export default function SupportPage() {
 
           {/* Contact form */}
           <div>
-            <h2 className="text-xl font-bold text-[#1F2937] mb-5">Nous contacter</h2>
-            <form className="bg-white rounded-2xl border border-stone-100 p-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)] space-y-4">
+            <h2 className="text-xl font-bold text-ink mb-5">Nous contacter</h2>
+            <form className="bg-white rounded-xl p-6 shadow-sm space-y-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-stone-600">Votre nom</label>
-                <Input placeholder="Prénom Nom" />
+                <label className="text-xs font-semibold text-ink-light">Votre nom</label>
+                <Input placeholder="Prenom Nom" />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-stone-600">Téléphone / Email</label>
+                <label className="text-xs font-semibold text-ink-light">Telephone / Email</label>
                 <Input placeholder="+221 77 000 00 00 ou email" />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-stone-600">Sujet</label>
-                <select className="w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#B91C1C]">
-                  {["Commande en cours", "Problème de livraison", "Remboursement", "Compte vendeur", "Autre"].map((s) => (
+                <label className="text-xs font-semibold text-ink-light">Sujet</label>
+                <select className="w-full h-11 px-4 rounded-lg border border-gray-200 text-sm outline-none focus:border-brand">
+                  {["Commande en cours", "Probleme de livraison", "Remboursement", "Compte vendeur", "Autre"].map((s) => (
                     <option key={s}>{s}</option>
                   ))}
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-stone-600">Message</label>
-                <Textarea rows={4} placeholder="Décrivez votre problème en détail…" />
+                <label className="text-xs font-semibold text-ink-light">Message</label>
+                <Textarea rows={4} placeholder="Decrivez votre probleme en detail..." />
               </div>
               <Button type="submit" className="w-full">
                 Envoyer

@@ -8,7 +8,7 @@ export default function AjouterProduitPage() {
   return (
     <DashboardShell role="vendeur" userName="Ferme Diallo">
       <div className="p-6 max-w-2xl">
-        <Link href="/vendeur" className="flex items-center gap-1.5 text-sm text-stone-500 hover:text-[#B91C1C] mb-6 w-fit">
+        <Link href="/vendeur" className="flex items-center gap-1.5 text-sm text-stone-500 hover:text-[#22A849] mb-6 w-fit">
           <ArrowLeft size={16} />
           Retour
         </Link>
@@ -19,7 +19,7 @@ export default function AjouterProduitPage() {
           <div className="bg-white rounded-2xl border border-stone-100 p-5 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
             <h2 className="font-bold text-[#1F2937] mb-4">Photos</h2>
             <div className="grid grid-cols-3 gap-3">
-              <div className="aspect-square rounded-2xl border-2 border-dashed border-stone-200 flex flex-col items-center justify-center gap-2 text-stone-400 hover:border-[#B91C1C] hover:bg-[#FEF2F2] hover:text-[#B91C1C] transition-colors cursor-pointer col-span-1">
+              <div className="aspect-square rounded-2xl border-2 border-dashed border-stone-200 flex flex-col items-center justify-center gap-2 text-stone-400 hover:border-[#22A849] hover:bg-[#F0FDF4] hover:text-[#22A849] transition-colors cursor-pointer col-span-1">
                 <Camera size={28} />
                 <span className="text-xs font-medium">Principale</span>
               </div>
@@ -40,7 +40,7 @@ export default function AjouterProduitPage() {
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-stone-600">Catégorie</label>
-              <select className="w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#B91C1C]">
+              <select className="w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#22A849]">
                 {["Poulet", "Dinde", "Canard", "Lapin", "Œufs", "Abats", "Surgelés", "Charcuterie"].map((c) => (
                   <option key={c}>{c}</option>
                 ))}
@@ -70,7 +70,7 @@ export default function AjouterProduitPage() {
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-stone-600">Unité</label>
-                <select className="w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#B91C1C]">
+                <select className="w-full h-11 px-4 rounded-xl border border-stone-200 text-sm outline-none focus:border-[#22A849]">
                   {["pièce", "kg", "plateau", "barquette", "litre"].map((u) => <option key={u}>{u}</option>)}
                 </select>
               </div>
@@ -82,14 +82,14 @@ export default function AjouterProduitPage() {
             <h2 className="font-bold text-[#1F2937] mb-4">Livraison</h2>
             <div className="space-y-3">
               <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" className="accent-[#B91C1C] w-4 h-4" defaultChecked />
+                <input type="checkbox" className="accent-[#22A849] w-4 h-4" defaultChecked />
                 <div>
                   <p className="text-sm font-medium text-[#1F2937]">Livraison disponible</p>
                   <p className="text-xs text-stone-400">Les acheteurs peuvent se faire livrer ce produit</p>
                 </div>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" className="accent-[#B91C1C] w-4 h-4" />
+                <input type="checkbox" className="accent-[#22A849] w-4 h-4" />
                 <div>
                   <p className="text-sm font-medium text-[#1F2937]">Retrait en ferme uniquement</p>
                   <p className="text-xs text-stone-400">L'acheteur doit venir chercher le produit</p>

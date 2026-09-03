@@ -1,66 +1,89 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { CheckCircle2, Menu, Search, ShoppingCart, User, X } from "lucide-react";
+import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { Brand } from "@/components/brand";
 
-const categoryLinks = ["Toutes les categories", "Poulet de chair", "Poulet local", "Local ameliore", "Poulet vivant", "Pret a cuire", "Vente en lot", "Ramasse"];
+const categoryLinks = [
+  "Toutes les categories",
+  "Poulet de chair",
+  "Poulet local",
+  "Local ameliore",
+  "Poulet vivant",
+  "Pret a cuire",
+  "Vente en lot",
+  "Ramasse",
+];
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(categoryLinks[0]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
-      <div className="hidden bg-[#1F2937] px-7 py-2.5 text-[13px] font-medium text-[#FECACA] md:flex md:items-center md:justify-between">
-        <span className="flex items-center gap-2">
-          <CheckCircle2 size={15} className="text-[#B91C1C]" />
-          Paiement 100% securise avec Dexpay
-        </span>
-        <span>Livraison disponible partout au Senegal</span>
+    <header className="sticky top-0 z-50 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+      {/* Top bar */}
+      <div className="hidden md:block bg-ink text-sm text-gray-300 px-6 py-2">
+        <div className="mx-auto max-w-6xl flex items-center justify-between">
+          <span>Livraison disponible partout au Senegal</span>
+          <span>Paiement securise avec Dexpay</span>
+        </div>
       </div>
 
-      <div className="border-b border-[#E5E7EB] px-4 py-3 md:px-7 md:py-4">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 md:gap-6">
+      {/* Main nav */}
+      <div className="px-4 py-3 md:px-6">
+        <div className="mx-auto flex max-w-6xl items-center gap-4">
           <Brand />
 
-          <div className="hidden h-[46px] max-w-[520px] flex-1 items-center rounded-[10px] border-[1.5px] border-[#E5E7EB] bg-[#FAFAFA] px-3.5 md:flex">
-            <Search size={18} className="text-[#9CA3AF]" />
+          <div className="hidden md:flex flex-1 max-w-md items-center h-10 rounded-lg bg-page px-3">
+            <Search size={16} className="text-muted" />
             <input
-              className="h-full flex-1 bg-transparent pl-2.5 text-[15px] outline-none placeholder:text-[#9CA3AF]"
-              placeholder="Rechercher un poulet, un vendeur, une ville..."
+              className="h-full flex-1 bg-transparent pl-2 text-sm outline-none placeholder:text-muted font-body"
+              placeholder="Rechercher un produit, un vendeur..."
             />
           </div>
 
-          <nav className="ml-auto hidden items-center gap-5 text-sm font-medium text-[#374151] lg:flex">
-            <Link href="/devenir-vendeur" className="hover:text-[#B91C1C]">Devenir vendeur</Link>
-            <Link href="/suivi-commande" className="hover:text-[#B91C1C]">Suivre commande</Link>
-            <Link href="/connexion" className="flex items-center gap-1.5 font-semibold text-[#1F2937] hover:text-[#B91C1C]">
-              <User size={18} />
+          <nav className="ml-auto hidden lg:flex items-center gap-6 font-body text-sm text-ink-light">
+            <Link href="/devenir-vendeur" className="hover:text-brand">Devenir vendeur</Link>
+            <Link href="/suivi-commande" className="hover:text-brand">Suivre commande</Link>
+            <Link href="/connexion" className="flex items-center gap-1.5 font-medium text-ink hover:text-brand">
+              <User size={16} />
               Connexion
             </Link>
           </nav>
 
-          <Link href="/panier" className="relative flex h-[46px] w-[46px] items-center justify-center rounded-[10px] bg-[#B91C1C] text-white">
-            <ShoppingCart size={20} />
-            <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-[#B91C1C] text-[11px] font-bold">2</span>
+          <Link
+            href="/panier"
+            className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-white"
+          >
+            <ShoppingCart size={18} />
+            <span className="absolute -right-1 -top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-ink text-[10px] font-bold text-white">
+              2
+            </span>
           </Link>
 
-          <button className="rounded-[10px] border border-[#E5E7EB] p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          <button
+            className="md:hidden p-2 rounded-lg bg-page"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      <div className="border-b border-[#E5E7EB] bg-white px-4 py-3 md:hidden">
-        <div className="flex h-11 items-center rounded-[10px] border-[1.5px] border-[#E5E7EB] bg-[#FAFAFA] px-3">
-          <Search size={17} className="text-[#9CA3AF]" />
-          <input className="h-full flex-1 bg-transparent pl-2 text-sm outline-none placeholder:text-[#9CA3AF]" placeholder="Rechercher..." />
+      {/* Mobile search */}
+      <div className="md:hidden px-4 pb-3">
+        <div className="flex items-center h-10 rounded-lg bg-page px-3">
+          <Search size={16} className="text-muted" />
+          <input
+            className="h-full flex-1 bg-transparent pl-2 text-sm outline-none placeholder:text-muted font-body"
+            placeholder="Rechercher..."
+          />
         </div>
       </div>
 
-      <div className="hidden border-b border-[#E5E7EB] bg-white px-7 py-2.5 md:block">
-        <div className="no-scrollbar mx-auto flex max-w-7xl justify-center gap-2 overflow-x-auto whitespace-nowrap text-[13.5px] font-medium text-[#4B5563]">
+      {/* Category tabs — desktop */}
+      <div className="hidden md:block bg-page/60 px-6 py-2">
+        <div className="no-scrollbar mx-auto flex max-w-6xl gap-1 overflow-x-auto">
           {categoryLinks.map((label) => (
             <Link
               key={label}
@@ -68,8 +91,8 @@ export function SiteHeader() {
               onClick={() => setActiveCategory(label)}
               className={
                 activeCategory === label
-                  ? "rounded-full bg-[#FEF2F2] px-3.5 py-2 font-semibold text-[#B91C1C]"
-                  : "rounded-full px-3.5 py-2 transition-colors hover:bg-[#FEF2F2] hover:text-[#B91C1C]"
+                  ? "rounded-full bg-brand-soft px-3.5 py-1.5 text-xs font-semibold text-brand"
+                  : "rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-light hover:text-brand"
               }
             >
               {label}
@@ -78,8 +101,9 @@ export function SiteHeader() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {menuOpen && (
-        <div className="border-b border-[#E5E7EB] bg-white px-4 py-3 md:hidden">
+        <div className="md:hidden bg-white px-4 py-2 shadow-lg">
           {[
             ["Catalogue", "/catalogue"],
             ["Commande rapide", "/commande-rapide"],
@@ -87,7 +111,12 @@ export function SiteHeader() {
             ["Suivre commande", "/suivi-commande"],
             ["Support", "/support"],
           ].map(([label, href]) => (
-            <Link key={href} href={href} onClick={() => setMenuOpen(false)} className="block rounded-[10px] px-3 py-2.5 text-sm font-medium text-[#374151] hover:bg-[#FEF2F2] hover:text-[#B91C1C]">
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMenuOpen(false)}
+              className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink-light hover:bg-page hover:text-brand"
+            >
               {label}
             </Link>
           ))}

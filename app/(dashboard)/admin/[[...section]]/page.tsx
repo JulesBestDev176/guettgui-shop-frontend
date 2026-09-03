@@ -28,7 +28,7 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
             { label: "Utilisateurs", value: "1 842", delta: "+34 cette semaine", color: "bg-blue-50 text-blue-600" },
-            { label: "Vendeurs actifs", value: "158", delta: "+12 ce mois", color: "bg-[#FEF2F2] text-[#B91C1C]" },
+            { label: "Vendeurs actifs", value: "158", delta: "+12 ce mois", color: "bg-[#F0FDF4] text-[#22A849]" },
             { label: "GMV ce mois", value: "4.2M F", delta: "+22%", color: "bg-emerald-50 text-emerald-600" },
             { label: "Commandes", value: "732", delta: "Juin 2026", color: "bg-purple-50 text-purple-600" },
           ].map((s) => (
@@ -55,7 +55,7 @@ export default function AdminDashboardPage() {
               <div className="space-y-3">
                 {pendingVendors.map((v) => (
                   <div key={v.name} className="flex items-center gap-3 p-3 rounded-xl bg-stone-50">
-                    <div className="w-9 h-9 gradient-brand rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    <div className="w-9 h-9 bg-[#22A849] rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0">
                       {v.name.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -83,7 +83,7 @@ export default function AdminDashboardPage() {
                   <div key={cat.name}>
                     <div className="flex justify-between text-sm mb-1.5">
                       <span className="font-medium text-stone-700">{cat.name}</span>
-                      <span className="font-semibold text-[#B91C1C]">{cat.pct}%</span>
+                      <span className="font-semibold text-[#22A849]">{cat.pct}%</span>
                     </div>
                     <Progress value={cat.pct} />
                   </div>

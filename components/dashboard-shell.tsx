@@ -57,9 +57,9 @@ const navItemsByRole: Record<Role, NavItem[]> = {
 };
 
 const roleColors: Record<Role, string> = {
-  client: "bg-[#B91C1C]",
-  vendeur: "bg-[#B91C1C]",
-  admin: "bg-[#B91C1C]",
+  client: "bg-brand",
+  vendeur: "bg-brand",
+  admin: "bg-brand",
   livreur: "bg-emerald-600",
 };
 
@@ -100,7 +100,7 @@ export function DashboardShell({
             className={cn(
               "flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-sm font-medium transition-all",
               active
-                ? "bg-[#B91C1C] text-white shadow-sm"
+                ? "bg-brand text-white shadow-sm"
                 : "text-[#9CA3AF] hover:bg-white/5 hover:text-white"
             )}
           >
