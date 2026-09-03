@@ -1,10 +1,39 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Shield, Users, TrendingUp } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, Shield, Users, TrendingUp, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/primitives";
 import { productImages } from "@/lib/product-images";
+import { login } from "@/lib/api";
 
 export default function ConnexionPage() {
+  const router = useRouter();
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const result = await login({ phone, password });
+      const role = result.user.role;
+      if (role === "SELLER") {
+        router.push("/vendeur");
+      } else {
+        router.push("/client");
+      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-[calc(100vh-4rem)] grid lg:grid-cols-2">
       {/* Form side */}
@@ -17,26 +46,41 @@ export default function ConnexionPage() {
           <h1 className="text-2xl font-bold text-ink mb-1">Bon retour !</h1>
           <p className="text-muted text-sm mb-8">Connectez-vous a votre compte</p>
 
-          <div className="space-y-4">
+          {error && (
+            <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-ink-light">Telephone ou email</label>
-              <Input placeholder="+221 77 000 00 00" />
+              <Input
+                placeholder="+221 77 000 00 00"
+                value={phone}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-1.5">
               <div className="flex justify-between">
                 <label className="text-xs font-semibold text-ink-light">Mot de passe</label>
                 <Link href="/support" className="text-xs text-brand hover:underline">Oublie ?</Link>
               </div>
-              <Input type="password" placeholder="••••••••" />
+              <Input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                required
+              />
             </div>
 
-            <Link href="/client" className="block">
-              <Button type="button" size="lg" className="w-full mt-2">
-                Se connecter
-                <ArrowRight size={16} />
-              </Button>
-            </Link>
-          </div>
+            <Button type="submit" size="lg" className="w-full mt-2" disabled={loading}>
+              {loading ? <Loader2 size={16} className="animate-spin" /> : "Se connecter"}
+              {!loading && <ArrowRight size={16} />}
+            </Button>
+          </form>
 
           <p className="text-center text-sm text-muted mt-6">
             Pas encore de compte ?{" "}

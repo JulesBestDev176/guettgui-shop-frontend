@@ -49,17 +49,17 @@ export function ProductCard({
           </h3>
 
           <div className="mt-2 flex items-center gap-1 font-body text-xs text-muted">
-            <MapPin size={12} />
-            <span>{vendor} · {city} · {weight}</span>
+            <MapPin size={12} className="shrink-0" />
+            <span className="truncate">{vendor} · {city} · {weight}</span>
           </div>
 
           {livraison && (
             <p className="mt-2 font-body text-[11px] font-medium text-green-700">Livraison disponible</p>
           )}
 
-          <div className="mt-3 flex items-center justify-between pt-3">
+          <div className="mt-3 flex items-center justify-between gap-2 pt-3">
             <span className="text-lg font-bold text-brand">{price.toLocaleString()} <span className="text-xs font-medium">FCFA</span></span>
-            <span className="rounded-lg bg-brand px-3 py-1.5 text-xs font-semibold text-white">
+            <span className="shrink-0 rounded-lg bg-brand px-3 py-2 text-xs font-semibold text-white">
               Commander
             </span>
           </div>

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Camera, CheckCircle, FileText, MapPin, Rocket, Trash2, Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, ArrowRight, Camera, CheckCircle, FileText, Loader2, MapPin, Rocket, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Progress, Textarea } from "@/components/ui/primitives";
+import { createSellerApplication } from "@/lib/api";
 
 const STEPS = [
   { title: "Votre profil" },
@@ -14,9 +16,75 @@ const STEPS = [
   { title: "Lancement" },
 ];
 
+interface FormData {
+  shopName: string;
+  phone: string;
+  description: string;
+  productionTypes: string[];
+  region: string;
+  city: string;
+  address: string;
+}
+
 export default function DevenirVendeurPage() {
+  const router = useRouter();
   const [step, setStep] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [formData, setFormData] = useState<FormData>({
+    shopName: "",
+    phone: "",
+    description: "",
+    productionTypes: [],
+    region: "Dakar",
+    city: "",
+    address: "",
+  });
+
   const progress = ((step + 1) / STEPS.length) * 100;
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const toggleProductionType = (type: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      productionTypes: prev.productionTypes.includes(type)
+        ? prev.productionTypes.filter((t) => t !== type)
+        : [...prev.productionTypes, type],
+    }));
+  };
+
+  const handleNext = async () => {
+    if (step === STEPS.length - 1) {
+      // Final step: submit
+      const token = typeof window !== "undefined" ? localStorage.getItem("gg-token") : null;
+      if (!token) {
+        router.push("/connexion");
+        return;
+      }
+
+      setSubmitting(true);
+      setSubmitError("");
+
+      try {
+        await createSellerApplication({
+          shopName: formData.shopName,
+          city: formData.city,
+          region: formData.region,
+          description: formData.description || undefined,
+        });
+        setStep(STEPS.length); // go to success screen
+      } catch (err: unknown) {
+        setSubmitError(err instanceof Error ? err.message : "Erreur lors de la soumission. Veuillez reessayer.");
+      } finally {
+        setSubmitting(false);
+      }
+    } else {
+      setStep(step + 1);
+    }
+  };
 
   if (step === STEPS.length) {
     return (
@@ -28,7 +96,7 @@ export default function DevenirVendeurPage() {
         <p className="mb-6 text-sm leading-relaxed text-muted">
           Votre dossier de vendeur est soumis. Notre equipe va verifier vos informations sous 24-48h. Vous serez notifie par SMS.
         </p>
-        <Button size="lg" className="w-full">Retour a l&apos;accueil</Button>
+        <Button size="lg" className="w-full" onClick={() => router.push("/")}>Retour a l&apos;accueil</Button>
       </div>
     );
   }
@@ -51,36 +119,37 @@ export default function DevenirVendeurPage() {
         <Progress value={progress} className="mt-5 bg-white/15" />
       </section>
 
-      <section className="mb-5 rounded-xl bg-white p-4 shadow-sm">
-        <div className="grid grid-cols-6 items-center">
+      <section className="mb-5 rounded-xl bg-white p-3 sm:p-4 shadow-sm">
+        <div className="flex items-center justify-between overflow-x-auto no-scrollbar">
           {STEPS.map(({ title }, i) => {
             const active = i === step;
             const done = i < step;
 
             return (
-              <button
-                key={title}
-                type="button"
-                onClick={() => setStep(i)}
-                aria-label={`Etape ${i + 1}: ${title}`}
-                title={title}
-                className="group relative flex min-h-12 items-center justify-center"
-              >
+              <div key={title} className="flex items-center">
                 {i > 0 && (
-                  <span className={`absolute right-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 ${i <= step ? "bg-brand" : "bg-gray-200"}`} />
+                  <span className={`h-0.5 w-4 sm:w-6 shrink-0 ${i <= step ? "bg-brand" : "bg-gray-200"}`} />
                 )}
-                <span
-                  className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm font-bold transition sm:h-11 sm:w-11 ${
-                    active
-                      ? "border-brand bg-brand text-white"
-                      : done
-                        ? "border-brand bg-white text-brand"
-                        : "border-gray-200 bg-page text-muted group-hover:border-brand"
-                  }`}
+                <button
+                  type="button"
+                  onClick={() => setStep(i)}
+                  aria-label={`Etape ${i + 1}: ${title}`}
+                  title={title}
+                  className="group flex items-center justify-center"
                 >
-                  {i + 1}
-                </span>
-              </button>
+                  <span
+                    className={`flex h-8 w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border-2 text-xs sm:text-sm font-bold transition ${
+                      active
+                        ? "border-brand bg-brand text-white"
+                        : done
+                          ? "border-brand bg-white text-brand"
+                          : "border-gray-200 bg-page text-muted group-hover:border-brand"
+                    }`}
+                  >
+                    {i + 1}
+                  </span>
+                </button>
+              </div>
             );
           })}
         </div>
@@ -89,7 +158,7 @@ export default function DevenirVendeurPage() {
             <p className="font-body text-xs text-muted">Etape {step + 1} sur {STEPS.length}</p>
             <h2 className="text-lg font-bold text-ink">{STEPS[step].title}</h2>
           </div>
-          <span className="rounded-full bg-brand-soft px-3 py-1 text-xs font-bold text-brand">{Math.round(progress)}%</span>
+          <span className="shrink-0 rounded-full bg-brand-soft px-3 py-1 text-xs font-bold text-brand">{Math.round(progress)}%</span>
         </div>
       </section>
 
@@ -99,13 +168,17 @@ export default function DevenirVendeurPage() {
           <h2 className="mt-1 text-xl font-bold text-ink">{STEPS[step].title}</h2>
         </div>
 
-        {step === 0 && <ProfileStep />}
-        {step === 1 && <LocationStep />}
+        {step === 0 && <ProfileStep formData={formData} updateField={updateField} toggleProductionType={toggleProductionType} />}
+        {step === 1 && <LocationStep formData={formData} updateField={updateField} />}
         {step === 2 && <PhotosStep />}
         {step === 3 && <DocumentsStep />}
         {step === 4 && <PaymentStep />}
         {step === 5 && <LaunchStep />}
       </section>
+
+      {submitError && (
+        <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">{submitError}</div>
+      )}
 
       <div className="flex gap-3">
         {step > 0 && (
@@ -114,36 +187,41 @@ export default function DevenirVendeurPage() {
             Retour
           </Button>
         )}
-        <Button className="ml-auto" onClick={() => setStep(step + 1)}>
-          {step === STEPS.length - 1 ? "Soumettre le dossier" : "Continuer"}
-          <ArrowRight size={16} />
+        <Button className="ml-auto" onClick={handleNext} disabled={submitting}>
+          {submitting && <Loader2 size={16} className="animate-spin" />}
+          {step === STEPS.length - 1 ? (submitting ? "Envoi..." : "Soumettre le dossier") : "Continuer"}
+          {!submitting && <ArrowRight size={16} />}
         </Button>
       </div>
     </div>
   );
 }
 
-function ProfileStep() {
+function ProfileStep({ formData, updateField, toggleProductionType }: {
+  formData: FormData;
+  updateField: (field: keyof FormData, value: string) => void;
+  toggleProductionType: (type: string) => void;
+}) {
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Nom de la ferme / boutique</label>
-        <Input placeholder="ex. Ferme Diallo" />
+        <Input placeholder="ex. Ferme Diallo" value={formData.shopName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("shopName", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Telephone professionnel</label>
-        <Input placeholder="+221 77 000 00 00" type="tel" />
+        <Input placeholder="+221 77 000 00 00" type="tel" value={formData.phone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("phone", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Description</label>
-        <Textarea rows={3} placeholder="Decrivez votre elevage, vos produits, votre savoir-faire" />
+        <Textarea rows={3} placeholder="Decrivez votre elevage, vos produits, votre savoir-faire" value={formData.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => updateField("description", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Type de production</label>
         <div className="flex flex-wrap gap-2">
           {["Poulet", "Dinde", "Canard", "Oeufs", "Lapin", "Autre"].map((type) => (
             <label key={type} className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium transition-colors hover:border-brand has-[:checked]:border-brand has-[:checked]:bg-brand-soft has-[:checked]:text-brand">
-              <input type="checkbox" className="accent-brand" />
+              <input type="checkbox" className="accent-brand" checked={formData.productionTypes.includes(type)} onChange={() => toggleProductionType(type)} />
               {type}
             </label>
           ))}
@@ -153,12 +231,19 @@ function ProfileStep() {
   );
 }
 
-function LocationStep() {
+function LocationStep({ formData, updateField }: {
+  formData: FormData;
+  updateField: (field: keyof FormData, value: string) => void;
+}) {
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Region</label>
-        <select className="h-11 w-full rounded-lg border border-gray-200 px-4 text-sm outline-none focus:border-brand">
+        <select
+          className="h-11 w-full rounded-lg border border-gray-200 px-4 text-sm outline-none focus:border-brand"
+          value={formData.region}
+          onChange={(e) => updateField("region", e.target.value)}
+        >
           {["Dakar", "Thies", "Saint-Louis", "Ziguinchor", "Kaolack", "Diourbel", "Fatick", "Kolda", "Tambacounda", "Louga"].map((region) => (
             <option key={region}>{region}</option>
           ))}
@@ -166,11 +251,11 @@ function LocationStep() {
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Ville / Commune</label>
-        <Input placeholder="ex. Thies Nord" />
+        <Input placeholder="ex. Thies Nord" value={formData.city} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("city", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Adresse precise</label>
-        <Input placeholder="Quartier, repere" />
+        <Input placeholder="Quartier, repere" value={formData.address} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("address", e.target.value)} />
       </div>
       <div className="flex gap-2 rounded-xl bg-brand-soft p-4 text-sm text-brand-dark">
         <MapPin size={16} className="mt-0.5 shrink-0" />

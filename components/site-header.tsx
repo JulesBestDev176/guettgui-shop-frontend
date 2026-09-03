@@ -62,7 +62,7 @@ export function SiteHeader() {
           </Link>
 
           <button
-            className="md:hidden p-2 rounded-lg bg-page"
+            className="md:hidden flex h-10 w-10 items-center justify-center rounded-lg bg-page"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -115,7 +115,7 @@ export function SiteHeader() {
               key={href}
               href={href}
               onClick={() => setMenuOpen(false)}
-              className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink-light hover:bg-page hover:text-brand"
+              className="block rounded-lg px-3 py-3 text-sm font-medium text-ink-light hover:bg-page hover:text-brand min-h-[44px]"
             >
               {label}
             </Link>

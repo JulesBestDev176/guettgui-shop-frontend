@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Phone, Mail, MessageCircle, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { Phone, Mail, MessageCircle, ChevronDown, ChevronUp, Send, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/primitives";
+import { createSupportTicket } from "@/lib/api";
 
 const faqs = [
   { q: "Comment passer une commande ?", a: "Parcourez notre catalogue, ajoutez des produits a votre panier et finalisez votre commande en choisissant votre mode de livraison et de paiement." },
@@ -15,12 +16,52 @@ const faqs = [
 
 export default function SupportPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    contact: "",
+    subject: "Commande en cours",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const updateField = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name.trim() || !formData.contact.trim() || !formData.message.trim()) {
+      setError("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError("");
+
+    try {
+      await createSupportTicket({
+        name: formData.name.trim(),
+        contact: formData.contact.trim(),
+        subject: formData.subject,
+        message: formData.message.trim(),
+      });
+      setSubmitted(true);
+      setFormData({ name: "", contact: "", subject: "Commande en cours", message: "" });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Erreur lors de l'envoi. Veuillez reessayer.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div>
       {/* Hero */}
-      <section className="bg-ink text-white py-14 px-4 text-center">
-        <h1 className="text-3xl font-bold mb-3">Centre d&apos;aide</h1>
+      <section className="bg-ink text-white py-10 sm:py-14 px-4 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-3">Centre d&apos;aide</h1>
         <p className="text-gray-400 text-sm max-w-md mx-auto">
           Notre equipe est disponible 7j/7 pour vous aider. Comment pouvons-nous vous aider aujourd&apos;hui ?
         </p>
@@ -53,7 +94,7 @@ export default function SupportPage() {
               {faqs.map((faq, i) => (
                 <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm">
                   <button
-                    className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-page transition-colors"
+                    className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-page transition-colors min-h-[48px]"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     <span className="font-semibold text-sm text-ink">{faq.q}</span>
@@ -76,32 +117,64 @@ export default function SupportPage() {
           {/* Contact form */}
           <div>
             <h2 className="text-xl font-bold text-ink mb-5">Nous contacter</h2>
-            <form className="bg-white rounded-xl p-6 shadow-sm space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-ink-light">Votre nom</label>
-                <Input placeholder="Prenom Nom" />
+
+            {submitted ? (
+              <div className="bg-white rounded-xl p-8 shadow-sm text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-soft">
+                  <CheckCircle size={32} className="text-brand" />
+                </div>
+                <h3 className="text-lg font-bold text-ink mb-2">Message envoye</h3>
+                <p className="text-sm text-muted mb-5">Nous avons bien recu votre message. Notre equipe vous repondra dans les plus brefs delais.</p>
+                <Button variant="ghost" onClick={() => setSubmitted(false)}>Envoyer un autre message</Button>
               </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-ink-light">Telephone / Email</label>
-                <Input placeholder="+221 77 000 00 00 ou email" />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-ink-light">Sujet</label>
-                <select className="w-full h-11 px-4 rounded-lg border border-gray-200 text-sm outline-none focus:border-brand">
-                  {["Commande en cours", "Probleme de livraison", "Remboursement", "Compte vendeur", "Autre"].map((s) => (
-                    <option key={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-ink-light">Message</label>
-                <Textarea rows={4} placeholder="Decrivez votre probleme en detail..." />
-              </div>
-              <Button type="submit" className="w-full">
-                Envoyer
-                <Send size={15} />
-              </Button>
-            </form>
+            ) : (
+              <form className="bg-white rounded-xl p-6 shadow-sm space-y-4" onSubmit={handleSubmit}>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-ink-light">Votre nom</label>
+                  <Input
+                    placeholder="Prenom Nom"
+                    value={formData.name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("name", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-ink-light">Telephone / Email</label>
+                  <Input
+                    placeholder="+221 77 000 00 00 ou email"
+                    value={formData.contact}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("contact", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-ink-light">Sujet</label>
+                  <select
+                    className="w-full h-11 px-4 rounded-lg border border-gray-200 text-sm outline-none focus:border-brand"
+                    value={formData.subject}
+                    onChange={(e) => updateField("subject", e.target.value)}
+                  >
+                    {["Commande en cours", "Probleme de livraison", "Remboursement", "Compte vendeur", "Autre"].map((s) => (
+                      <option key={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-ink-light">Message</label>
+                  <Textarea
+                    rows={4}
+                    placeholder="Decrivez votre probleme en detail..."
+                    value={formData.message}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => updateField("message", e.target.value)}
+                  />
+                </div>
+                {error && (
+                  <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</div>
+                )}
+                <Button type="submit" className="w-full" disabled={submitting}>
+                  {submitting ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
+                  {submitting ? "Envoi..." : "Envoyer"}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>

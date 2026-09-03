@@ -1,24 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Minus, Plus, X, ShoppingCart, ArrowRight, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { productImages } from "@/lib/product-images";
-
-const initialItems = [
-  { id: 1, name: "Poulet entier frais fermier", vendor: "Ferme Diallo", weight: "1kg", price: 4500, qty: 2, image: productImages.wholeChicken },
-  { id: 2, name: "Cuisses de poulet x6", vendor: "Aviculture Thies", weight: "1.5kg", price: 3200, qty: 1, image: productImages.chickenCuts },
-  { id: 3, name: "Oeufs frais (plateau 30)", vendor: "Pondeuses du Sine", weight: "—", price: 4200, qty: 1, image: productImages.eggs },
-];
+import { getCart, updateQty as updateCartQty, removeFromCart, type CartItem } from "@/lib/cart";
 
 export default function PanierPage() {
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState<CartItem[]>([]);
 
-  const updateQty = (id: number, delta: number) => {
-    setItems((prev) => prev.map((item) => item.id === id ? { ...item, qty: Math.max(1, item.qty + delta) } : item));
+  useEffect(() => {
+    setItems(getCart());
+  }, []);
+
+  const handleUpdateQty = (productId: string, delta: number) => {
+    const item = items.find((i) => i.productId === productId);
+    if (!item) return;
+    const newQty = Math.max(1, item.qty + delta);
+    updateCartQty(productId, newQty);
+    setItems(getCart());
   };
 
-  const removeItem = (id: number) => setItems((prev) => prev.filter((i) => i.id !== id));
+  const handleRemove = (productId: string) => {
+    removeFromCart(productId);
+    setItems(getCart());
+  };
 
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
   const delivery = subtotal >= 10000 ? 0 : 800;
@@ -44,24 +49,29 @@ export default function PanierPage() {
           {/* Items */}
           <div className="lg:col-span-2 space-y-3">
             {items.map((item) => (
-              <div key={item.id} className="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-                <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg object-cover shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-ink text-sm leading-tight">{item.name}</h3>
-                  <p className="text-xs text-muted mt-0.5">{item.vendor} · {item.weight}</p>
-                  <p className="font-bold text-brand mt-1">{(item.price * item.qty).toLocaleString()} F</p>
+              <div key={item.productId} className="bg-white rounded-xl p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <img src={item.image} alt={item.name} className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-ink text-sm leading-tight truncate">{item.name}</h3>
+                    <p className="text-xs text-muted mt-0.5 truncate">{item.vendor} · {item.weight}</p>
+                    <p className="font-bold text-brand mt-1">{(item.price * item.qty).toLocaleString()} F</p>
+                  </div>
+                  <button onClick={() => handleRemove(item.productId)} className="p-2 rounded-lg text-muted hover:text-red-500 hover:bg-red-50 shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center sm:hidden">
+                    <X size={16} />
+                  </button>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="mt-2 flex items-center justify-between sm:mt-0 sm:justify-end sm:gap-2">
                   <div className="flex items-center gap-2 bg-page rounded-lg p-1">
-                    <button onClick={() => updateQty(item.id, -1)} className="w-7 h-7 flex items-center justify-center rounded-md bg-white text-ink">
+                    <button onClick={() => handleUpdateQty(item.productId, -1)} className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded-md bg-white text-ink">
                       <Minus size={12} />
                     </button>
                     <span className="w-6 text-center text-sm font-bold">{item.qty}</span>
-                    <button onClick={() => updateQty(item.id, 1)} className="w-7 h-7 flex items-center justify-center rounded-md bg-white text-ink">
+                    <button onClick={() => handleUpdateQty(item.productId, 1)} className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded-md bg-white text-ink">
                       <Plus size={12} />
                     </button>
                   </div>
-                  <button onClick={() => removeItem(item.id)} className="p-1.5 rounded-lg text-muted hover:text-red-500 hover:bg-red-50">
+                  <button onClick={() => handleRemove(item.productId)} className="hidden sm:flex p-1.5 rounded-lg text-muted hover:text-red-500 hover:bg-red-50">
                     <X size={16} />
                   </button>
                 </div>
