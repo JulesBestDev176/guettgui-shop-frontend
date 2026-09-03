@@ -15,11 +15,12 @@ export default function CommandeRapidePage() {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [region, setRegion] = useState("Dakar");
+  const [region] = useState("Dakar");
 
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(getCart());
   }, []);
 

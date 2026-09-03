@@ -9,6 +9,7 @@ export default function PanierPage() {
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(getCart());
   }, []);
 

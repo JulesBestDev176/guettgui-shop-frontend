@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { ChevronDown, Filter, X } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { listProducts, listCategories } from "@/lib/api";
-import type { Product, Category, ProductListResponse } from "@/lib/types";
+import type { Product, Category } from "@/lib/types";
 
 const saleModes = ["A l'unite", "En lot", "Ramasse"];
 
@@ -168,6 +168,7 @@ export default function CataloguePage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProducts(filters);
   }, [filters, fetchProducts]);
 

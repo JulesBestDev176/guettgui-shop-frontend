@@ -23,6 +23,7 @@ export default function ProductPage() {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     setError("");
     Promise.all([getProduct(slug), getRelatedProducts(slug)])
