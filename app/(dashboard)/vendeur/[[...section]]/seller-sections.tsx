@@ -62,17 +62,6 @@ export function StatCard({ label, value, sub, icon: Icon, color }: { label: stri
   );
 }
 
-function InfoLine({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
-  return (
-    <div className="flex gap-3">
-      <Icon size={18} className="mt-0.5 text-[#22A849]" />
-      <div>
-        <p className="font-semibold text-[#1F2937]">{value}</p>
-        <p className="font-body text-xs text-[#6B7280]">{label}</p>
-      </div>
-    </div>
-  );
-}
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
@@ -172,6 +161,7 @@ export function OverviewPage() {
       const stored = localStorage.getItem("gg-user");
       if (stored) {
         const u = JSON.parse(stored);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (u.fullName) setUserName(u.fullName);
         else if (u.shopName) setUserName(u.shopName);
       }
