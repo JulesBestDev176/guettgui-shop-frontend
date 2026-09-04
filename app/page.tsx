@@ -46,8 +46,8 @@ export default function HomePage() {
           listCategories(),
           listProducts({ limit: 4 }),
         ]);
-        setCategories(cats);
-        setProducts(prodsRes.data);
+        setCategories(Array.isArray(cats) ? cats : []);
+        setProducts(Array.isArray(prodsRes?.data) ? prodsRes.data : Array.isArray(prodsRes) ? prodsRes : []);
       } catch (err) {
         console.error("Failed to fetch homepage data:", err);
       } finally {

@@ -185,6 +185,10 @@ export async function createSellerProduct(data: {
   return request<Product>("/seller/products", { method: "POST", body: JSON.stringify(data) });
 }
 
+export async function getSellerStats(): Promise<{ revenue: number; averageBasket: number; productViews: number; conversionRate: number }> {
+  return request<{ revenue: number; averageBasket: number; productViews: number; conversionRate: number }>("/seller/stats");
+}
+
 export async function getSellerDeliveryZones(): Promise<DeliveryZone[]> {
   return request<DeliveryZone[]>("/seller/delivery-zones");
 }
