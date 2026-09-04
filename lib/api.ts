@@ -154,7 +154,9 @@ export async function removeFavorite(productId: string): Promise<void> {
 // ── Seller ──
 
 export async function createSellerApplication(data: {
+  fullName: string;
   shopName: string;
+  phone: string;
   city: string;
   region: string;
   description?: string;

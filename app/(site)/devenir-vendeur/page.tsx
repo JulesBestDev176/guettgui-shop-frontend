@@ -17,6 +17,7 @@ const STEPS = [
 ];
 
 interface FormData {
+  fullName: string;
   shopName: string;
   phone: string;
   description: string;
@@ -32,6 +33,7 @@ export default function DevenirVendeurPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState<FormData>({
+    fullName: "",
     shopName: "",
     phone: "",
     description: "",
@@ -70,7 +72,9 @@ export default function DevenirVendeurPage() {
 
       try {
         await createSellerApplication({
+          fullName: formData.fullName,
           shopName: formData.shopName,
+          phone: formData.phone,
           city: formData.city,
           region: formData.region,
           description: formData.description || undefined,
@@ -204,6 +208,10 @@ function ProfileStep({ formData, updateField, toggleProductionType }: {
 }) {
   return (
     <div className="space-y-4">
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-ink-light">Nom complet</label>
+        <Input placeholder="ex. Mamadou Diallo" value={formData.fullName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("fullName", e.target.value)} />
+      </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Nom de la ferme / boutique</label>
         <Input placeholder="ex. Ferme Diallo" value={formData.shopName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("shopName", e.target.value)} />
