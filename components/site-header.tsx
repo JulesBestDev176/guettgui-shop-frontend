@@ -51,6 +51,8 @@ export function SiteHeader() {
             </Link>
           </nav>
 
+          <div className="flex-1 md:hidden" />
+
           <Link
             href="/panier"
             className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-white"
