@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Camera, CheckCircle, FileText, Loader2, MapPin, Rocket, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Progress, Textarea } from "@/components/ui/primitives";
-import { createSellerApplication } from "@/lib/api";
+import { registerSeller } from "@/lib/api";
 
 const STEPS = [
   { title: "Votre profil" },
@@ -20,6 +20,8 @@ interface FormData {
   fullName: string;
   shopName: string;
   phone: string;
+  email: string;
+  password: string;
   description: string;
   productionTypes: string[];
   region: string;
@@ -36,6 +38,8 @@ export default function DevenirVendeurPage() {
     fullName: "",
     shopName: "",
     phone: "",
+    email: "",
+    password: "",
     description: "",
     productionTypes: [],
     region: "Dakar",
@@ -60,26 +64,24 @@ export default function DevenirVendeurPage() {
 
   const handleNext = async () => {
     if (step === STEPS.length - 1) {
-      // Final step: submit
-      const token = typeof window !== "undefined" ? localStorage.getItem("gg-token") : null;
-      if (!token) {
-        router.push("/connexion");
-        return;
-      }
-
       setSubmitting(true);
       setSubmitError("");
 
       try {
-        await createSellerApplication({
+        const res = await registerSeller({
           fullName: formData.fullName,
           shopName: formData.shopName,
           phone: formData.phone,
+          password: formData.password,
+          email: formData.email || undefined,
           city: formData.city,
           region: formData.region,
           description: formData.description || undefined,
         });
-        setStep(STEPS.length); // go to success screen
+        if (res.accessToken) {
+          localStorage.setItem("gg-token", res.accessToken);
+        }
+        setStep(STEPS.length);
       } catch (err: unknown) {
         setSubmitError(err instanceof Error ? err.message : "Erreur lors de la soumission. Veuillez reessayer.");
       } finally {
@@ -217,8 +219,16 @@ function ProfileStep({ formData, updateField, toggleProductionType }: {
         <Input placeholder="ex. Ferme Diallo" value={formData.shopName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("shopName", e.target.value)} />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-ink-light">Telephone professionnel</label>
+        <label className="text-xs font-semibold text-ink-light">Telephone</label>
         <Input placeholder="+221 77 000 00 00" type="tel" value={formData.phone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("phone", e.target.value)} />
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-ink-light">Email (optionnel)</label>
+        <Input placeholder="vendeur@email.com" type="email" value={formData.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("email", e.target.value)} />
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-ink-light">Mot de passe</label>
+        <Input placeholder="8 caracteres minimum" type="password" value={formData.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField("password", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-ink-light">Description</label>

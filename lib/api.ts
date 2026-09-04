@@ -153,15 +153,17 @@ export async function removeFavorite(productId: string): Promise<void> {
 
 // ── Seller ──
 
-export async function createSellerApplication(data: {
+export async function registerSeller(data: {
   fullName: string;
   shopName: string;
   phone: string;
+  password: string;
+  email?: string;
   city: string;
   region: string;
   description?: string;
 }) {
-  return request("/seller-applications", { method: "POST", body: JSON.stringify(data) });
+  return request<AuthResponse>("/seller-register", { method: "POST", body: JSON.stringify(data) });
 }
 
 export async function getSellerDashboard(): Promise<SellerDashboard> {
